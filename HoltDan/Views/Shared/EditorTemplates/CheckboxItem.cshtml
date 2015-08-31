@@ -1,0 +1,11 @@
+﻿@model HoltDan.Models.CheckboxItem
+
+@Html.CheckBoxFor(x => x.IsSelected)
+@{
+    var p = @Model.Text;
+    var c = @Model.ID;
+}
+@Html.LabelFor(x => x.IsSelected, @Model.Text)
+@Html.HiddenFor(x => x.ID)
+@Html.HiddenFor(x => x.IsSelected)
+<br />

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Turok";
+
+    var dirName = "~/App_Data/Turok/images";
+
+    var dirs = HoltDan.Models.DirMgr.GetDirNames(Server,dirName);
+    var files = HoltDan.Models.DirMgr.GetFileNames(Server.MapPath(dirName), "*.*");
+    ViewBag.Files = files;
+}
+
+<h2>Index</h2>
+<ul>
+    @foreach (var file in ViewBag.Files)
+    {
+        <li>@file</li>
+    }
+</ul>

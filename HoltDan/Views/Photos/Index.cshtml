@@ -1,0 +1,67 @@
+﻿@model HoltDan.Models.PhotosViewModel
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+}
+@section Styles
+{
+    <style>
+        body {
+            background-color: mintcream;
+        }
+
+        .photosDiv {
+            background-color: white;
+        }
+    </style>
+}
+@using (Html.BeginForm("Index", "Photos", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="panel">
+                <div class="panel-heading">Duration</div>
+                <div class="panel-body">
+
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Secs3, new { id = "Secs3" })
+                    @Html.Label("Secs3", "3 sec.")
+                    <br />
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Secs10, new { id = "Secs10" })
+                    @Html.Label("Secs10", "10 sec.")
+                    <br />
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Secs30, new { id = "Secs30" })
+                    @Html.Label("Secs10", "30 sec.")
+                    <br />
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Min1, new { id = "Min1" })
+                    @Html.Label("Min1", "1 min.")
+                    <br />
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Min5, new { id = "Min5" })
+                    @Html.Label("Min5", "5 minu.")
+                    <br />
+                    @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Min10, new { id = "Min10" })
+                    @Html.Label("Min10", "10 min.")
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">Sequence</div>
+                <div class="panel-body">
+                    @Html.RadioButtonFor(model => model.Order, PhotosViewModel.Orders.Sequential, new { id = "Sequential" })
+                    @Html.Label("Sequential", "Sequential")
+                    @Html.RadioButtonFor(model => model.Order, PhotosViewModel.Orders.Random, new { id = "Random" })
+                    @Html.Label("Random", "Random")
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">OK</button>
+        </div>
+        <div class="col-xs-9">
+            <div class="panel">
+                <div class="panel-heading">Family Photos</div>
+                <div class="panel-body">
+                    @Html.EditorFor(x => x.Dirs)
+                </div>
+            </div>
+        </div>
+    </div>
+        }

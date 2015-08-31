@@ -1,0 +1,52 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+}
+@section Styles
+{
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+}
+@*<div class="row">
+        <div class="col-sm-12 center-block" style="width:100%">*@
+            <img id="thePic" class="ri" src="@Model.First()" />
+        @*</div>
+</div>*@
+@*@foreach (var m in Model)
+{
+        var str = (m as string).Replace("\\", "/");
+    
+        var a = @Url.Content(str.Substring(str.LastIndexOf("/media/")));
+    <p>@a</p>
+        <img src="@a">
+}*@
+@section Scripts
+{
+    <script type="text/javascript">
+        var files = [
+            @foreach (var f in Model)
+	        {
+                @:'@f',
+	        }
+        ];
+        var idx = 0;
+
+        function ShowNext()
+        {
+            if (idx == files.length - 1)
+                idx = 0;
+            else
+                ++idx;
+
+            $("#thePic").attr("src", files[idx]);
+        }
+
+        $(function () {
+            setInterval(ShowNext,@ViewBag.IntervalAsMiliseconds);
+        })
+    </script>
+}
