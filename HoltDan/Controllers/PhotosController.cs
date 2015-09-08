@@ -13,6 +13,14 @@ namespace HoltDan.Controllers
         // GET: Photos
         public ActionResult Index()
         {
+            var ppm = new PhotosPlaylistModel();
+
+            ppm.Duration = PhotosViewModel.Intervals.Secs30;
+            ppm.Sequence = PhotosViewModel.Orders.Sequential;
+
+            ppm.DirName = new List<string> { "A.png", "B.jpg", "C.gif" };
+            var s = ppm.AsJson();
+            var ppm2 = PhotosPlaylistModel.CreateFromJson(s);
             var dirName = "~/media/Family";
 
             var vm = new PhotosViewModel(Server, dirName);

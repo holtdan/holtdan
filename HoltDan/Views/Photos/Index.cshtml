@@ -7,24 +7,22 @@
 {
     <style>
         body {
-            background-color: mintcream;
+            background-color: black;
         }
 
         .photosDiv {
+            padding: 15px;
             background-color: white;
         }
     </style>
 }
 @using (Html.BeginForm("Index", "Photos", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-
-
     <div class="row">
         <div class="col-xs-3">
-            <div class="panel">
-                <div class="panel-heading">Duration</div>
-                <div class="panel-body">
-
+            <div class="photosDiv">
+                <h3>Duration</h3>
+                <div>
                     @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Secs3, new { id = "Secs3" })
                     @Html.Label("Secs3", "3 sec.")
                     <br />
@@ -43,25 +41,25 @@
                     @Html.RadioButtonFor(model => model.Interval, PhotosViewModel.Intervals.Min10, new { id = "Min10" })
                     @Html.Label("Min10", "10 min.")
                 </div>
-            </div>
-            <div class="panel">
-                <div class="panel-heading">Sequence</div>
-                <div class="panel-body">
+                <h3>Sequence</h3>
+                <div>
                     @Html.RadioButtonFor(model => model.Order, PhotosViewModel.Orders.Sequential, new { id = "Sequential" })
                     @Html.Label("Sequential", "Sequential")
                     @Html.RadioButtonFor(model => model.Order, PhotosViewModel.Orders.Random, new { id = "Random" })
                     @Html.Label("Random", "Random")
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary pull-right">OK</button>
+                <div>
+                    <button type="submit" class="btn btn-primary pull-right">Go!</button>
+                </div>
         </div>
         <div class="col-xs-9">
-            <div class="panel">
-                <div class="panel-heading">Family Photos</div>
-                <div class="panel-body">
+            <div class="photosDiv">
+                <h3>Family Photos</h3>
+                <div>
                     @Html.EditorFor(x => x.Dirs)
                 </div>
             </div>
         </div>
     </div>
-        }
+}
