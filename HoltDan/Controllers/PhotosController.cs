@@ -41,6 +41,7 @@ namespace HoltDan.Controllers
             var fileArr = files.ToArray();
 
             ViewBag.IntervalAsMiliseconds = vm.IntervalAsMiliseconds;
+            ViewBag.HoldSeconds = vm.IntervalAsMiliseconds / 1000;
 
             if (vm.Order == PhotosViewModel.Orders.Random)
             {

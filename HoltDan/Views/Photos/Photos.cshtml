@@ -10,98 +10,110 @@
             background-color: black;
         }
 
-        .imgBg {
+        .winLeft {
             background-color: green;
+            color: white;
+            padding: 10px;
             position: absolute;
             top: 0;
             left: 0;
-            width: 33%;
+            width: 50%;
+            height: 100%;
+            /*min-width: 80px;
+            min-height: 100px;*/
+        }
+        .winRight {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
             height: 100%;
             /*min-width: 80px;
             min-height: 100px;*/
         }
     </style>
 }
-<div class="imgBg">
+@*<div class="winLeft">
+    <p id="counter"></p>
 </div>
-@*<div class="row">
-    <div class="col-sm-12 center-block" style="width:100%">*@
+<div class="winRight">
+    <p id="counter"></p>
+</div>*@
 <img id="thePic" class="ri" src="@Model.First()" />
-@*</div>
-    </div>*@
-@*@foreach (var m in Model)
-    {
-            var str = (m as string).Replace("\\", "/");
 
-            var a = @Url.Content(str.Substring(str.LastIndexOf("/media/")));
-        <p>@a</p>
-            <img src="@a">
-    }*@
 @section Scripts
 {
     <script type="text/javascript">
-        var files = [
-            @foreach (var f in Model)
+    var files = [
+        @foreach (var f in Model)
 	        {
                 @:'@f',
     	        }
-        ];
-        var idx = 0;
-        var interval = null;
-        var forward = null; // acts as 1st time flag by starting null
+    ];
+    var idx = 0;
+    var totInterval = @ViewBag.HoldSeconds;
+    var remainingInterval = @ViewBag.HoldSeconds;
+        var ticInterval = 1;
+        var isPlaying = true;
+    //var isForward = true;
 
-        function Advance(forward){
-            idx += (forward ? 1 : -1);
+    var interval = null;
 
-            if (idx < 0)
-                idx = files.length - 1;
-            else if (idx > files.length - 1)
-                idx = 0;
-        }
-        function ShowNext()
-        {
-            if (forward != null)
-                Advance(forward);
-            else
-                forward = true;
+    function Advance(forward){
+        idx += (forward ? 1 : -1);
 
-            $("#thePic").attr("src", files[idx]);
-        }
-        function DoSlideshow(){
-            if (interval == null)
-                interval = setInterval(ShowNext,@ViewBag.IntervalAsMiliseconds);
-            else
-            {
-                clearInterval(interval);
-                interval = null;
+        if (idx < 0)
+            idx = files.length - 1;
+        else if (idx > files.length - 1)
+            idx = 0;
+
+        $("#thePic").attr("src", files[idx]);
+    }
+        function Controller(){
+            $("#counter").html(remainingInterval);
+
+            if(isPlaying){
+                remainingInterval -= ticInterval;
+
+                if(remainingInterval<0){
+                    remainingInterval = totInterval;
+                    Advance(true);
+                }
             }
         }
-        
 
-        $(function () {
-            DoSlideshow();
+    $(function () {
+        //DoSlideshow();
+        setInterval(Controller,ticInterval * 1000);
+        $("#thePic").click(function(e){
+            e.stopPropagation();
+            //DoSlideshow();
+            isPlaying = !isPlaying;
+        });
+        $(document).click(function(e){
 
-            $("#thePic").click(function(e){
-                e.stopPropagation();
-                DoSlideshow();
-            });
-            $(document).click(function(e){
-                var third = screen.width / 3;
-                var cx = e.clientX;
-                var sw = screen.width;
+            if(isPlaying)
+                isPlaying = false;
 
-                forward = (cx > sw / 2);
-                ShowNext();
+            var third = screen.width / 3;
+            var cx = e.clientX;
+            var sw = screen.width;
 
-                //if(cx < third)
-                //    Advance(false);
-                //else if(cx > sw - third)
-                //    Advance(true);
-                var cy = e.clientY;
-                var sx = e.screenX;
-                var sy = e.screenY;
-                var sh = screen.height;
-            });
-        })
+            forward = (cx > sw / 2);
+            Advance(forward);
+
+            //if(cx < third)
+            //    Advance(false);
+            //else if(cx > sw - third)
+            //    Advance(true);
+            //var cy = e.clientY;
+            //var sx = e.screenX;
+            //var sy = e.screenY;
+            //var sh = screen.height;
+        });
+    })
     </script>
 }
