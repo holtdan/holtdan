@@ -238,21 +238,33 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.min.css">
-      <DependentUpon>Site.css</DependentUpon>
+    <Content Include="Content\HoltDan.css">
+      <DependentUpon>HoltDan.less</DependentUpon>
+    </Content>
+    <Content Include="Content\HoltDan.min.css">
+      <DependentUpon>HoltDan.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Turok.css">
+      <DependentUpon>Turok.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Turok.min.css">
+      <DependentUpon>Turok.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="images\Logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\Turok.less" />
-    <Content Include="Content\Site.less" />
-    <Content Include="Content\Site.css.map">
-      <DependentUpon>Site.css</DependentUpon>
+    <Content Include="Content\HoltDan.less" />
+    <Content Include="Content\HoltDan.css.map">
+      <DependentUpon>HoltDan.css</DependentUpon>
     </Content>
+    <Content Include="Content\Turok.css.map">
+      <DependentUpon>Turok.css</DependentUpon>
+    </Content>
+    <Content Include="fonts\hurryup.ttf" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

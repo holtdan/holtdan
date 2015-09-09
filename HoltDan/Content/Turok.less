@@ -1,2 +1,147 @@
-﻿body {
+﻿@turokColor: #ffff35;
+@turokBgColor: #9CA58C;
+
+@font-face {
+    font-family: turokFont;
+    src: url(../fonts/hurryup.ttf) format('truetype');
+}
+.siteFont {
+    font-family: turokFont;
+    color: @turokColor;
+}
+
+body {
+    background-color: @turokBgColor;
+}
+
+h1, h2, h3{
+    clear: both;
+    text-align: center;
+    .siteFont();
+}
+ul
+{
+	list-style-type:none;
+}
+.siteDiv{
+    float: left;
+    padding: 10px;
+    .siteFont();
+}
+.imgDiv{
+    float: left;
+    padding: 10px;
+    .siteFont();
+}
+.imgDivBlack{
+    .imgDiv();
+    background-color:black;
+}
+.imgSet{
+    clear: both;
+    text-align: center;
+}
+.imgSetBlack{
+    .imgSet();
+    background-color:black;
+}
+.blackDiv img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+.borderTable
+{
+  width:100%;
+  border: none;
+  border-spacing: 0;
+}
+
+.mmImage (@x, @y) {
+    background: url("../images/MainMenuSpriteSheet.png") @x @y;
+    float:left;
+}
+#mmTurokHead{
+    width: 25px;
+    height: 33px;
+    .mmImage(0px, -136px);
+}
+#mmTurokSight{
+    width: 32px;
+    height: 32px;
+    .mmImage(0px, -168px);
+}
+#mmGrass{
+    width: 118px;
+    height: 28px;
+    .mmImage(0px, -264px);
+}
+#mmLogo { width: 256px; height: 128px; .mmImage (-68px, 0); }
+#mmLogo:hover { width: 256px; height: 128px; .mmImage (-68px, -136px); }
+
+#mmEmail { width: 72px; height: 128px; .mmImage (-712px, 0); }
+#mmEmail:hover { width: 72px; height: 128px; .mmImage (-712px, -136px); }
+
+#mmWallFill { width: 64px; height: 128px; .mmImage (0, 0); }
+#mmWallRight { width: 64px; height: 128px; .mmImage (-790px, 0); }
+.wallFilled{
+    width: 64px; 
+    height: 128px; 
+    .mmImage (0, 0);
+    background-repeat:repeat-x;
+}
+.mmChoice (@x, @y) {
+    width: 72px;
+    height: 92px;
+    .mmImage(@x, @y);
+}
+#mmComics { .mmChoice(-328px, 0); }
+#mmComics:hover { .mmChoice(-328px, -136px); }
+
+#mmGames { .mmChoice(-408px, 0); }
+#mmGames:hover { .mmChoice(-408px, -136px); }
+
+#mmLinks { .mmChoice(-484px, 0); }
+#mmLinks:hover { .mmChoice(-484px, -136px); }
+
+#mmStuff { .mmChoice(-560px, 0); }
+#mmStuff:hover { .mmChoice(-560px, -136px); }
+
+#mmAbout { .mmChoice(-636px, 0); }
+#mmAbout:hover { .mmChoice(-636px, -136px); }
+
+.hi {
+    width: 32px;
+    height: 64px;
+    background-image: url("../images/WarpPortalSprite.png");
+    
+    -webkit-animation: play .8s steps(7) infinite;
+       -moz-animation: play .8s steps(7) infinite;
+         -o-animation: play .8s steps(7) infinite;
+            animation: play .8s steps(7) infinite;
+}
+
+@-webkit-keyframes play {
+   from { background-position:    0; }
+     to { background-position: -224px; }
+}
+
+@-moz-keyframes play {
+   from { background-position:    0; }
+     to { background-position: -224px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0; }
+     to { background-position: -224px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0; }
+     to { background-position: -224px; }
+}
+
+@keyframes play {
+   from { background-position:    0; }
+     to { background-position: -224px; }
 }

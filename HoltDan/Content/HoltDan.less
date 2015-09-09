@@ -1,6 +1,11 @@
-﻿body {
+﻿@siteBgColor: black;
+@siteDivBgColor: darkgray;
+@siteDivFgColor: white;
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: @siteBgColor;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -54,4 +59,21 @@ img.ri:empty
   img.ri {
       max-height: 90%;
   }
+}
+
+.siteDiv{
+    padding: 15px;
+    background-color: @siteDivBgColor;
+    color: @siteDivFgColor;
+}
+.scrollDiv {
+    .siteDiv();
+    height: 100vh;
+    overflow:auto;
+}
+.siteSection{
+    margin-top: 2em;
+    font-size:medium;
+    font-weight: bold;
+    color:aqua;
 }
