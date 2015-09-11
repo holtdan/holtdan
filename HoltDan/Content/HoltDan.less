@@ -1,5 +1,5 @@
 ﻿@siteBgColor: black;
-@siteDivBgColor: darkgray;
+@siteDivBgColor: #404040;
 @siteDivFgColor: white;
 
 body {
@@ -27,6 +27,31 @@ select,
 textarea {
     max-width: 280px;
 }
+/**********************************************************************************/
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.border-radius-left(@radius: 5px) {
+  -webkit-border-left-radius: @radius;
+     -moz-border-left-radius: @radius;
+          border-top-left-radius: @radius;
+          border-bottom-left-radius: @radius;
+}
+.border-radius-left {
+  -webkit-border-left-radius: 5px;
+     -moz-border-left-radius: 5px;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+}
+.border-radius-right {
+  -webkit-border-right-radius: 5px;
+     -moz-border-right-radius: 5px;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+}
+/**********************************************************************************/
 /* Got all this here: http://cssdeck.com/labs/responsive-image */
 img.ri
 {
@@ -60,9 +85,12 @@ img.ri:empty
       max-height: 90%;
   }
 }
-
+/****************************************************************************************/
+/****************************************************************************************/
 .siteDiv{
-    padding: 15px;
+    .border-radius();
+    padding: 1em;
+    margin-bottom: 1em;
     background-color: @siteDivBgColor;
     color: @siteDivFgColor;
 }
@@ -72,8 +100,6 @@ img.ri:empty
     overflow:auto;
 }
 .siteSection{
-    margin-top: 2em;
-    font-size:medium;
+    font-size:large;
     font-weight: bold;
-    color:aqua;
 }

@@ -11,7 +11,6 @@
         }
 
         .winLeft {
-            background-color: green;
             color: white;
             padding: 10px;
             position: absolute;
@@ -23,7 +22,6 @@
             min-height: 100px;*/
         }
         .winRight {
-            background-color: red;
             color: white;
             padding: 10px;
             position: absolute;
@@ -36,12 +34,16 @@
         }
     </style>
 }
-@*<div class="winLeft">
-    <p id="counter"></p>
+<div class="winLeft">
+    <p><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></p>
+    <p><span class="showAction glyphicon glyphicon-pause" aria-hidden="true"></span></p>
+    <p><span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Click the image or play/pause buttons to pause and resume the show. Click the step buttons to move to the previous/next image."></span></p>
+    @*<p class="counter"></p>*@
 </div>
 <div class="winRight">
-    <p id="counter"></p>
-</div>*@
+    <p><span class="glyphicon glyphicon-step-forward pull-right" aria-hidden="true"></span></p>
+    @*<p><span class="showAction glyphicon glyphicon-pause pull-right" aria-hidden="true"></span></p>*@
+</div>
 <img id="thePic" class="ri" src="@Model.First()" />
 
 @section Scripts
@@ -62,6 +64,20 @@
 
     var interval = null;
 
+    function Pause(){
+        isPlaying = false;
+        $(".showAction").removeClass("glyphicon-pause").addClass("glyphicon-play");
+    }
+    function Play(){
+        isPlaying = true;
+        $(".showAction").removeClass("glyphicon-play").addClass("glyphicon-pause");
+    }
+    function TogglePlayPause(){
+        if(isPlaying)
+            Pause();
+        else
+            Play();
+    }
     function Advance(forward){
         idx += (forward ? 1 : -1);
 
@@ -73,7 +89,7 @@
         $("#thePic").attr("src", files[idx]);
     }
         function Controller(){
-            $("#counter").html(remainingInterval);
+            $(".counter").html(remainingInterval);
 
             if(isPlaying){
                 remainingInterval -= ticInterval;
@@ -88,15 +104,20 @@
     $(function () {
         //DoSlideshow();
         setInterval(Controller,ticInterval * 1000);
-        $("#thePic").click(function(e){
+        $("#thePic, .showAction").click(function(e){
             e.stopPropagation();
-            //DoSlideshow();
-            isPlaying = !isPlaying;
+            TogglePlayPause();
         });
+        $(".glyphicon-step-backward").click(function(e){
+            Advance(false);
+        })
+        $(".glyphicon-step-forward").click(function(e){
+            Advance(true);
+        })
         $(document).click(function(e){
 
             if(isPlaying)
-                isPlaying = false;
+                Pause();
 
             var third = screen.width / 3;
             var cx = e.clientX;

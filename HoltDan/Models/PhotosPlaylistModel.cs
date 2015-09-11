@@ -7,8 +7,8 @@ namespace HoltDan.Models
 {
     public class PhotosPlaylistModel
     {
-        public PhotosViewModel.Intervals Duration { get; set; }
-        public PhotosViewModel.Orders Sequence { get; set; }
+        //public PhotosViewModel.Intervals Duration { get; set; }
+        //public PhotosViewModel.Orders Sequence { get; set; }
 
         public List<string> DirName { get; set; }
 

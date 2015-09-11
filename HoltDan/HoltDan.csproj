@@ -265,6 +265,7 @@
       <DependentUpon>Turok.css</DependentUpon>
     </Content>
     <Content Include="fonts\hurryup.ttf" />
+    <Content Include="App_Data\Photos.config" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -320,9 +321,7 @@
     <Content Include="Views\Photos\Photos.cshtml" />
     <Content Include="Views\Shared\_LayoutMinimal.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

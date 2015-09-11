@@ -1,62 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace HoltDan.Models
 {
     public class PhotosViewModel
     {
-        public enum Intervals
-        {
-            Secs3,
-            Secs10,
-            Secs30,
-            Min1,
-            Min5,
-            Min10,
-        }
-        public enum Orders
-        {
-            Random,
-            Sequential
-        }
-        public Intervals Interval { get; set; }
-        public Orders Order { get; set; }
-        public List<CheckboxItem> Dirs { get; set; }
+        public SelectList IntervalSelList { get; set; }
 
-        public int IntervalAsMiliseconds
-        {
-            get
-            {
-                switch (this.Interval)
-                {
-                    case Intervals.Secs3:
-                        return 3000;
-                    case Intervals.Secs10:
-                        return 10000;
-                    case Intervals.Secs30:
-                        return 30000;
-                    case Intervals.Min1:
-                        return 60000;
-                    case Intervals.Min5:
-                        return 60000 * 5;
-                    case Intervals.Min10:
-                        return 60000 * 10;
-                    default:
-                        return 5000;
-                }
-            }
-        }
+        [Display(Name = "Interval")]
+        public int IntervalSeconds { get; set; }
+        [Display(Name = "Random Sequence")]
+        public bool RandomSequence { get; set; }
+
+        public List<CheckboxItem> Dirs { get; set; }
+        public List<CheckboxItem> Playlists { get; set; }
+
         public PhotosViewModel()
         {
+            IntervalSeconds = 10;
+            RandomSequence = true;
         }
         public PhotosViewModel(HttpServerUtilityBase server, string dir)
+            :this()
         {
-            var dirs = Directory.GetDirectories(server.MapPath(dir));
+            var realDir = server.MapPath(dir);
+
+            var dirs = Directory.GetDirectories(realDir);
 
             this.Dirs = dirs.Select(d => new CheckboxItem { ID = d, Text = d.Substring(d.LastIndexOf("\\") + 1) }).ToList();
+
+            var idx = Directory.GetFiles(realDir, "*.txt");
+
+            this.Playlists = idx.Select(d => new CheckboxItem 
+            { 
+                ID = d,
+                Text = d.Substring(0, d.Length - 4).Substring(d.LastIndexOf("\\") + 1) // skip path, remove ".txt"
+            }).ToList();
         }
     }
 }
