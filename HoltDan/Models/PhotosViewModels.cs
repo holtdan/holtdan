@@ -12,6 +12,8 @@ namespace HoltDan.Models
     {
         public SelectList IntervalSelList { get; set; }
 
+        [Display(Name = "Folder")]
+        public string Dir { get; set; }
         [Display(Name = "Interval")]
         public int IntervalSeconds { get; set; }
         [Display(Name = "Random Sequence")]
@@ -19,6 +21,9 @@ namespace HoltDan.Models
 
         public List<CheckboxItem> Dirs { get; set; }
         public List<CheckboxItem> Playlists { get; set; }
+
+        public IEnumerable<string> DirNames { get; set; }
+        public IEnumerable<string> PlaylistNames { get; set; }
 
         public PhotosViewModel()
         {
@@ -28,18 +33,20 @@ namespace HoltDan.Models
         public PhotosViewModel(HttpServerUtilityBase server, string dir)
             :this()
         {
+            this.Dir = dir;
             var realDir = server.MapPath(dir);
 
             var dirs = Directory.GetDirectories(realDir);
-
-            this.Dirs = dirs.Select(d => new CheckboxItem { ID = d, Text = d.Substring(d.LastIndexOf("\\") + 1) }).ToList();
+            this.DirNames = dirs.Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
+            this.Dirs = DirNames.Select(d => new CheckboxItem { ID = d, Text = d }).ToList();
 
             var idx = Directory.GetFiles(realDir, "*.txt");
 
-            this.Playlists = idx.Select(d => new CheckboxItem 
+            this.PlaylistNames = idx.Select(s => s.Substring(s.LastIndexOf("\\") + 1));
+            this.Playlists = PlaylistNames.Select(d => new CheckboxItem
             { 
                 ID = d,
-                Text = d.Substring(0, d.Length - 4).Substring(d.LastIndexOf("\\") + 1) // skip path, remove ".txt"
+                Text = d.Substring(0, d.Length - 4) // remove ".txt"
             }).ToList();
         }
     }

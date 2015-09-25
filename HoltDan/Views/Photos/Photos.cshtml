@@ -44,7 +44,7 @@
     <p><span class="glyphicon glyphicon-step-forward pull-right" aria-hidden="true"></span></p>
     @*<p><span class="showAction glyphicon glyphicon-pause pull-right" aria-hidden="true"></span></p>*@
 </div>
-<img id="thePic" class="ri" src="@Model.First()" />
+<img id="thePic" class="ri" src="@Url.Content(Model.First())" />
 
 @section Scripts
 {
@@ -52,7 +52,8 @@
     var files = [
         @foreach (var f in Model)
 	        {
-                @:'@f',
+                var url = Url.Content(f);
+                @:'@url',
     	        }
     ];
     var idx = 0;

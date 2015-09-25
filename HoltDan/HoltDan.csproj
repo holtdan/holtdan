@@ -230,6 +230,7 @@
     <Compile Include="Models\DirFilesModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PhotosConfigModel.cs" />
     <Compile Include="Models\PhotosPlaylistModel.cs" />
     <Compile Include="Models\PhotosViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
