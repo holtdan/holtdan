@@ -37,7 +37,7 @@ namespace HoltDan.Controllers
                 if (play != null)
                 {
                     ViewBag.Title = play.Text;
-                    dirName = "~/media/" + play.Root;
+                    dirName = "~/media/" + play.Root + "/";
 
                     isGallery = true;
                 }
