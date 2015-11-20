@@ -2,9 +2,11 @@
 @{
     ViewBag.Title = "Turok";
 
-    var dirName = "~/App_Data/Turok/images";
+    Layout = "~/Views/Shared/_LayoutTurok.cshtml";
+        
+    var dirName = "~/media/Turok/images";
 
-    var dirs = HoltDan.Models.DirMgr.GetDirNames(Server,dirName);
+    var dirs = HoltDan.Models.DirMgr.GetDirNames(Server, dirName);
     var files = HoltDan.Models.DirMgr.GetFileNames(Server.MapPath(dirName), "*.*");
     ViewBag.Files = files;
 }

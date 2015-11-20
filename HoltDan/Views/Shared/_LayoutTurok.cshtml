@@ -4,10 +4,45 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/Content/Turok.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <div>
+        <table class="borderTable" style="height: 128px;">
+            <tr>
+                <td style="width: 256px;">
+                    <a href="~/Index.cshtml">
+                        <div id="mmLogo">
+                        </div>
+                    </a>
+                </td>
+                <td style="background-image: url(@Url.Content("~/media/Turok/images/WallBgFill.png")); background-repeat:repeat-x;">
+                    <a href="@Url.Action("Games","Turok","")">
+                        <div id="mmGames">
+                        </div>
+                    </a>
+                    <a href="@Url.Action("Stuff","Turok","")">
+                        <div id="mmStuff">
+                        </div>
+                    </a>
+                    <a href="@Url.Action("Comics","Turok","")">
+                        <div id="mmComics">
+                        </div>
+                    </a>
+                </td>
+                <td style="width: 64px">
+                    <div id="mmWallRight"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
         @RenderBody()
     </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>

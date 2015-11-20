@@ -20,6 +20,10 @@ namespace HoltDan.Controllers
         {
             return View();
         }
+        public ActionResult GameDetail(string page)
+        {
+            return View(page);
+        }
         public ActionResult Stuff()
         {
             return View();

@@ -321,6 +321,16 @@
     <Content Include="Views\Photos\Index.cshtml" />
     <Content Include="Views\Photos\Photos.cshtml" />
     <Content Include="Views\Shared\_LayoutMinimal.cshtml" />
+    <Content Include="Views\Turok\Games.cshtml" />
+    <Content Include="Views\Turok\Stuff.cshtml" />
+    <Content Include="Views\Turok\Comics.cshtml" />
+    <Content Include="Views\Turok\Games_t2Textures.cshtml" />
+    <Content Include="Views\Turok\Games_t3Enemies.cshtml" />
+    <Content Include="Views\Turok\Games_t4Images_FrontEndPlayers.cshtml" />
+    <Content Include="Views\Turok\Games_t4Images_Gallery.cshtml" />
+    <Content Include="Views\Turok\Games_t4Images_OnScreenGraphics.cshtml" />
+    <Content Include="Views\Turok\Games_t4Images_RotateClub.cshtml" />
+    <Content Include="Views\Turok\Games_Weapons.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -59,7 +59,7 @@ namespace HoltDan.Models
         {
             var files = new List<string>();
 
-            var relDir = realDir.Substring(realDir.LastIndexOf("\\images\\"));
+            var relDir = realDir.Substring(realDir.LastIndexOf("\\media\\"));
 
             foreach (var m in masks)
             {
