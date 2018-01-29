@@ -11,16 +11,16 @@ namespace HoltDan.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            DropboxRestAPI.Client client = new DropboxRestAPI.Client(new DropboxRestAPI.Options
-            {
-                AccessToken = "vBgoZGNyPIMAAAAAAAA0GTo_t9tHdiE_f4EMOGNoelpkTKu7-bWzVNxAN9rdeM4E"
-            });
-            var what = await client.Core.Metadata.MetadataAsync("/Art", include_media_info: true);
+            //DropboxRestAPI.Client client = new DropboxRestAPI.Client(new DropboxRestAPI.Options
+            //{
+            //    AccessToken = "vBgoZGNyPIMAAAAAAAA0GTo_t9tHdiE_f4EMOGNoelpkTKu7-bWzVNxAN9rdeM4E"
+            //});
+            //var what = await client.Core.Metadata.MetadataAsync("/Art", include_media_info: true);
 
-            foreach (var c in what.contents)
-            {
-                var x = await client.Core.Metadata.SharesAsync(c.path);
-            }
+            //foreach (var c in what.contents)
+            //{
+            //    var x = await client.Core.Metadata.SharesAsync(c.path);
+            //}
             //var token = client.Core.OAuth2.TokenAsync(authCode);
             return View();
         }
