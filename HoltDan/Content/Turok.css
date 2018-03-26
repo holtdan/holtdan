@@ -1,23 +1,22 @@
-﻿@turokColor: #ffff35;
-@turokBgColor: #9CA58C;
-
-@font-face {
+﻿@font-face {
     font-family: turokFont;
     src: url(../fonts/hurryup.ttf) format('truetype');
 }
 .siteFont {
     font-family: turokFont;
-    color: @turokColor;
+    color: #ffff35;
 }
 
 body {
-    background-color: @turokBgColor;
+    background-color: #9CA58C;
 }
 
 h1, h2, h3{
     clear: both;
     text-align: center;
-    .siteFont();
+    
+    font-family: turokFont;
+    color: #ffff35;
 }
 ul
 {
@@ -26,15 +25,18 @@ ul
 .siteDiv{
     float: left;
     padding: 10px;
-    .siteFont();
+    
+    font-family: turokFont;
+    color: #ffff35;
 }
 .imgDiv{
     float: left;
     padding: 10px;
-    .siteFont();
+    
+    font-family: turokFont;
+    color: #ffff35;
 }
 .imgDivBlack{
-    .imgDiv();
     background-color:black;
 }
 .imgSet{
@@ -42,7 +44,6 @@ ul
     text-align: center;
 }
 .imgSetBlack{
-    .imgSet();
     background-color:black;
 }
 .blackDiv img {
