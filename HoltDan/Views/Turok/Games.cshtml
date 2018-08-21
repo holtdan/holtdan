@@ -7,18 +7,18 @@
 <h2>Games</h2>
 <a href="@Url.Content("~/Games_Weapons.cshtml")">Turok 1..3 Weapons</a>
 
-<div class="siteDiv">
+<div class="turokDiv">
     <img src="@Url.Content("~/media/Turok/images/t1/TurokDinosaurHunter.jpg")">
 </div>
-<div class="siteDiv">
+<div class="turokDiv">
     <img src="@Url.Content("~/media/Turok/images/t2/gameTurok2_SeedsOfEvil.jpg")">
     @Html.ActionLink("Textures", "GameDetail", new { page = "Games_t2Textures" })
 </div>
-<div class="siteDiv">
+<div class="turokDiv">
     <img src="@Url.Content("~/media/Turok/images/t3/gameTurok3_ShadowOfOblivion.jpg")">
     @Html.ActionLink("Enemies", "GameDetail", new { page = "Games_t3Enemies" })
 </div>
-<div class="siteDiv">
+<div class="turokDiv">
     <img src="@Url.Content("~/media/Turok/images/t4/gameTurokEvolution.jpg")">
     <ul>
         <li>@Html.ActionLink("Players","GameDetail", new { page = "Games_t4Images_FrontEndPlayers" })</li>

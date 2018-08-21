@@ -2,21 +2,32 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: black;
+    color: #9d9d9d;
 }
-.siteDiv{
+.danDiv{
     border-radius: 5px;
     padding: 1em;
-    margin-bottom: 1em;
+    margin: 1em;
     background-color: #404040;
-    color: white;
+    border-color: lightgray;
 }
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: #3344ff;
+    color:#ffffff;
+  }
+/*select, .dropdown-menu{
+    color: white;
+    background-color: black !important;
+}
+option:checked { 
+    background-color: red; 
+    color:black;
+}
+
+option:not(:checked) { color: #ffd800; }*/
 .scrollDiv {
     height: 100vh;
     overflow:auto;
-}
-.siteSection{
-    font-size:large;
-    font-weight: bold;
 }
 /**********************************************************************************/
 /* Set padding to keep content from hitting the edges */

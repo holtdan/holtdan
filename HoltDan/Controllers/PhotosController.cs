@@ -11,41 +11,23 @@ using System.Xml.Linq;
 
 namespace HoltDan.Controllers
 {
+#if false
     public class PhotosController : Controller
     {
+
         // GET: Photos
         public ActionResult Index(string id)
         {
             var dbgStr = new StringBuilder();
 
             //var cookie = Request.Cookies["selStudios"];
+            var photosPath = Server.MapPath("~/media/Photos");
+            var photosRoots = Directory.GetDirectories(photosPath);
 
-            ViewBag.Title = "Family";
-            var dirName = "~/media/Family/"; // the default
-            var isGallery = false;
-
-            var pcm = new PhotosConfigModel(Server.MapPath("~/App_Data/Photos.config"));
-
-            dbgStr.AppendLine(Server.MapPath("~/App_Data/Photos.config"));
-            dbgStr.AppendLine(Server.MapPath(dirName));
-            //dbgStr.AppendLine(Server.MapPath(Directory.GetCurrentDirectory()));
-
-            if (id != null)
-            {
-                var play = pcm.Galleries.Where(q => q.ID == id.ToLower()).SingleOrDefault();
-
-                if (play != null)
-                {
-                    ViewBag.Title = play.Text;
-                    dirName = "~/media/" + play.Root + "/";
-
-                    isGallery = true;
-                }
-            }
-            var vm = new PhotosViewModel(Server, dirName);
+            var vm = new PhotosViewModel(Server, photosRoots, "Family");
             ViewBag.IntervalAsMiliseconds = vm.IntervalSeconds * 1000;
             ViewBag.HoldSeconds = vm.IntervalSeconds;
-
+#if false
             if (id != null && !isGallery)
             {
                 var isPlaylist = vm.PlaylistNames.Select(s => s.ToLower()).Contains(id.ToLower()+".txt");
@@ -70,7 +52,9 @@ namespace HoltDan.Controllers
                     return View("Photos", allFiles.Select(f=> dirName + f).Select(f=>f.Replace("\\","/")));
                 }
             }
-            vm.IntervalSelList = new SelectList(pcm.Intervals, "NumSeconds", "Text", vm.IntervalSeconds);
+#endif
+            //vm.IntervalSelList = new SelectList(
+            //    pcm.Intervals, "NumSeconds", "Text", vm.IntervalSeconds);
 
             ViewBag.DbgStr = dbgStr.ToString();
             return View(vm);
@@ -167,4 +151,5 @@ namespace HoltDan.Controllers
             return fileArr;
         }
     }
+#endif
 }

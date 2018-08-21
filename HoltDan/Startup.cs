@@ -1,9 +1,10 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(HoltDan.Startup))]
+//[assembly: OwinStartupAttribute(typeof(HoltDan.Startup))]
 namespace HoltDan
 {
+#if false
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -11,4 +12,5 @@ namespace HoltDan
             ConfigureAuth(app);
         }
     }
+#endif
 }

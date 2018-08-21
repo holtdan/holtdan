@@ -218,6 +218,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CheckboxItem.cs" />
     <Compile Include="Models\DirFilesModels.cs" />
+    <Compile Include="Models\HtmlExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhotosConfigModel.cs" />
@@ -307,8 +308,7 @@
     <Content Include="Views\Turok\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTurok.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckboxItem.cshtml" />
-    <Content Include="Views\Photos\Index.cshtml" />
-    <Content Include="Views\Photos\Photos.cshtml" />
+    <Content Include="Views\Home\Photos.cshtml" />
     <Content Include="Views\Shared\_LayoutMinimal.cshtml" />
     <Content Include="Views\Turok\Games.cshtml" />
     <Content Include="Views\Turok\Stuff.cshtml" />
@@ -320,8 +320,13 @@
     <Content Include="Views\Turok\Games_t4Images_OnScreenGraphics.cshtml" />
     <Content Include="Views\Turok\Games_t4Images_RotateClub.cshtml" />
     <Content Include="Views\Turok\Games_Weapons.cshtml" />
+    <Content Include="Views\Home\ShowPhotos.cshtml" />
+    <Content Include="Views\Home\SongsMine.cshtml" />
+    <Content Include="Views\Home\_SongsMine.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Music\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

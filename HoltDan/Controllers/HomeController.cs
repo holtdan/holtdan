@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HoltDan.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -9,7 +11,17 @@ namespace HoltDan.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var photosPath = Server.MapPath("~/media/Photos");
+            var photosRoots = Directory.GetDirectories(photosPath).Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
+            ViewBag.PhotoRoots = photosRoots;
+            ViewBag.MediaRoot = Server.MapPath("~/media/");
+            //var vm = new PhotosViewModel(Server, photosRoots, "Family");
+
+            base.OnActionExecuting(filterContext);
+        }
+        public ActionResult Index()
         {
             //DropboxRestAPI.Client client = new DropboxRestAPI.Client(new DropboxRestAPI.Options
             //{
@@ -24,7 +36,23 @@ namespace HoltDan.Controllers
             //var token = client.Core.OAuth2.TokenAsync(authCode);
             return View();
         }
+        public ActionResult Photos(string id)
+        {
+            var photosPath = Server.MapPath($"~/media/Photos/{id}");
+            var vm = new PhotosViewModel(photosPath);
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult ShowPhotos(PhotosViewModel vm)
+        {
+            var dirs = vm.Dirs.Where(d => d.IsSelected).Select(d => d.ID).ToList();
 
+            if (dirs.Count() == 0)
+                return RedirectToAction("Index");
+
+            ViewBag.HoldSeconds = (int)TimeSpan.Parse(vm.IntervalSpan).TotalSeconds;
+            return View(vm.BuildShow(Server.MapPath($"~/media/Photos/")));
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -34,9 +62,11 @@ namespace HoltDan.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+        public ActionResult Songs(string id)
+        {
+            return id == "dan" ? View("SongsMine") : View();
         }
     }
 }

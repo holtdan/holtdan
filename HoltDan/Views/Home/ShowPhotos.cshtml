@@ -1,0 +1,141 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+}
+@section Styles
+{
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .winLeft {
+            color: white;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            /*min-width: 80px;
+            min-height: 100px;*/
+        }
+        .winRight {
+            color: white;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            /*min-width: 80px;
+            min-height: 100px;*/
+        }
+    </style>
+}
+<div class="winLeft">
+    <p><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></p>
+    <p><span class="showAction glyphicon glyphicon-pause" aria-hidden="true"></span></p>
+    <p><span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Click the image or play/pause buttons to pause and resume the show. Click the step buttons to move to the previous/next image."></span></p>
+    @*<p class="counter"></p>*@
+</div>
+<div class="winRight">
+    <p><span class="glyphicon glyphicon-step-forward pull-right" aria-hidden="true"></span></p>
+    @*<p><span class="showAction glyphicon glyphicon-pause pull-right" aria-hidden="true"></span></p>*@
+</div>
+<img id="thePic" class="ri" src="@Url.Content(Model.First())" />
+
+@section Scripts
+{
+    <script type="text/javascript">
+        var files = [
+            @foreach (var f in Model)
+	        {
+                var url = Url.Content(f);
+                @:'@url',
+        	        }
+        ];
+        var idx = 0;
+        var totInterval = @ViewBag.HoldSeconds;
+        var remainingInterval = @ViewBag.HoldSeconds;
+        var ticInterval = 1;
+        var isPlaying = true;
+        //var isForward = true;
+
+        var interval = null;
+
+        function Pause(){
+            isPlaying = false;
+            $(".showAction").removeClass("glyphicon-pause").addClass("glyphicon-play");
+        }
+        function Play(){
+            isPlaying = true;
+            $(".showAction").removeClass("glyphicon-play").addClass("glyphicon-pause");
+        }
+        function TogglePlayPause(){
+            if(isPlaying)
+                Pause();
+            else
+                Play();
+        }
+        function Advance(forward){
+            idx += (forward ? 1 : -1);
+
+            if (idx < 0)
+                idx = files.length - 1;
+            else if (idx > files.length - 1)
+                idx = 0;
+
+            $("#thePic").attr("src", files[idx]);
+        }
+        function Controller(){
+            $(".counter").html(remainingInterval);
+
+            if(isPlaying){
+                remainingInterval -= ticInterval;
+
+                if(remainingInterval<0){
+                    remainingInterval = totInterval;
+                    Advance(true);
+                }
+            }
+        }
+
+        $(function () {
+            //DoSlideshow();
+            setInterval(Controller,ticInterval * 1000);
+            $("#thePic, .showAction").click(function(e){
+                e.stopPropagation();
+                TogglePlayPause();
+            });
+            $(".glyphicon-step-backward").click(function(e){
+                Advance(false);
+            })
+            $(".glyphicon-step-forward").click(function(e){
+                Advance(true);
+            })
+            $(document).click(function(e){
+
+                if(isPlaying)
+                    Pause();
+
+                var third = screen.width / 3;
+                var cx = e.clientX;
+                var sw = screen.width;
+
+                forward = (cx > sw / 2);
+                Advance(forward);
+
+                //if(cx < third)
+                //    Advance(false);
+                //else if(cx > sw - third)
+                //    Advance(true);
+                //var cy = e.clientY;
+                //var sx = e.screenX;
+                //var sy = e.screenY;
+                //var sh = screen.height;
+            });
+        })
+    </script>
+}
