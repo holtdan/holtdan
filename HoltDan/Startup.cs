@@ -1,6 +1,4 @@
-﻿using Microsoft.Owin;
-using Owin;
-
+﻿
 //[assembly: OwinStartupAttribute(typeof(HoltDan.Startup))]
 namespace HoltDan
 {
