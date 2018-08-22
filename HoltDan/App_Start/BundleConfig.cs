@@ -1,4 +1,7 @@
-﻿using System.Web;
+﻿using BundleTransformer.Core.Builders;
+using BundleTransformer.Core.Orderers;
+using BundleTransformer.Core.Transformers;
+using System.Web;
 using System.Web.Optimization;
 
 namespace HoltDan
@@ -8,6 +11,17 @@ namespace HoltDan
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
+
+            bundles.UseCdn = true;
+            var cssTransformer = new StyleTransformer();
+            var jsTransformer = new ScriptTransformer();
+            var nullOrderer = new NullOrderer();
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -23,9 +37,15 @@ namespace HoltDan
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            var cssBundle = new StyleBundle("~/bundles/css");
+            cssBundle.Include("~/Content/css",
                       "~/Content/bootstrap.css",
-                      "~/Content/HoltDan.css"));
+                      "~/Content/HoltDan.less"/*,
+                      "~/Content/HoltDan.css"*/);
+            cssBundle.Builder = new NullBuilder();
+            cssBundle.Transforms.Add(cssTransformer);
+            cssBundle.Orderer = nullOrderer;
+            bundles.Add(cssBundle);
         }
     }
 }
