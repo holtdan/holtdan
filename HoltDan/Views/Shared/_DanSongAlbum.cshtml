@@ -1,0 +1,45 @@
+﻿@*
+    Strictly for Dan Songs    
+*@
+@model HoltDan.Models.SongAlbumViewModel
+@{
+    var genID = "_" + new String(Model.Title.Where(Char.IsLetterOrDigit).ToArray());
+}
+@*<div class="danDiv">
+        <div class="danTitle">@Model.Title</div>
+        <div class="danNotes">@Model.Notes</div>
+        @foreach (var s in Model.Songs)
+        {
+            Html.RenderPartial("_SongViewModel", s);
+        }
+    </div>*@
+
+@*<div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#@genID">@Model.Title</a>
+            </div>
+        </div>
+        <div id="@genID" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="danNotes">@Model.Notes</div>
+                @foreach (var s in Model.Songs)
+                {
+                    Html.RenderPartial("_SongViewModel", s);
+                }
+            </div>
+        </div>
+    </div>*@
+
+<div class="danSongAlbum">
+    <div class="danDiv">
+        <a class="btn btn-default btn-block" data-toggle="collapse" data-parent="#accordion" href="#@genID"><span class="danButtonTitle">@Model.Title</span></a>
+    </div>
+    <div id="@genID" class="collapse danDiv">
+        <div class="danNotes">@Model.Notes</div>
+        @foreach (var s in Model.Songs)
+            {
+                Html.RenderPartial("_Song", s);
+            }
+    </div>
+</div>

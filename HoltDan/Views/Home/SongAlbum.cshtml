@@ -1,0 +1,39 @@
+﻿@* 
+    Displays a Folder's Notes.html fils and all the songs    
+*@
+@model HoltDan.Models.DirMgr
+
+@{
+    ViewBag.Title = "SongAlbum";
+}
+<div class="danSongAlbum">
+    <div class="danTitle">@Model.Title</div>
+    <div class="danDiv">
+        <div class="danNotes">@Model.Notes</div>
+        @foreach (var f in Model.Files)
+        {
+            Html.RenderPartial("_Song", new SongViewModel(f.AudioFileName, f.Title, f.Notes));
+        }
+    </div>
+</div>
+<audio id="audioPlayer" src="">
+    Your browser does not support the audio format.
+</audio>
+@section Scripts
+{
+<script type="text/javascript">
+    let audioMgr = new DanAudioMgr("audioPlayer",
+        function (triggerElem, eventName) {
+            var $t = $(triggerElem);
+            var $p = $t.closest(".danSong");
+            var $title = $p.find(".danTitle");
+            if (eventName == "onplay") {
+                $title.addClass("danActive")
+            }
+            else if (eventName == "onstop") {
+                $title.removeClass("danActive")
+            }
+            debugger;
+        });
+</script>
+}

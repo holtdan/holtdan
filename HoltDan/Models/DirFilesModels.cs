@@ -7,37 +7,95 @@ using System.Web;
 
 namespace HoltDan.Models
 {
-    public class DirFilesModels
+    public static class DirFiles
     {
+        public static string PastLast(this string path, string lastWhat)
+        {
+            return path.Substring(path.LastIndexOf(lastWhat) + 1);
+        }
+        public static string DirLeaf(this string path)
+        {
+            var sep = Path.DirectorySeparatorChar;
+            var p1 = path.TrimEnd(sep);
+            var p2 = p1.Substring(p1.LastIndexOf(sep) + 1);
+            return p2;
+        }
     }
     public class DirMgr
     {
+        public string Dir { get; private set; }
+        public string Title { get; set; }
+        public string Notes { get; set; }
+        public List<FileSet> Files { get; set; }
+
+        static string[] AudioSuffixes = { ".mp3", ".wav" };
+        static string[] ImageSuffixes = { ".png", ".jpg", ".bmp", ".gif" };
+        static string[] TextSuffixes = { ".html", ".txt" };
+
         static Random _random = new Random();
         static public void Shuffle<T>(T[] array)
-        {
-            int n = array.Length;
-            for (int i = 0; i < n; i++)
             {
-                // NextDouble returns a random number between 0 and 1.
-                // ... It is equivalent to Math.random() in Java.
-                int r = i + (int)(_random.NextDouble() * (n - i));
-                T t = array[r];
-                array[r] = array[i];
-                array[i] = t;
+                int n = array.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    // NextDouble returns a random number between 0 and 1.
+                    // ... It is equivalent to Math.random() in Java.
+                    int r = i + (int)(_random.NextDouble() * (n - i));
+                    T t = array[r];
+                    array[r] = array[i];
+                    array[i] = t;
+                }
             }
-        }
 
-        public class _File
+        public class FileSet
         {
-            public string NameOnly { get; set; }
-            public string ImgSrc { get; set; }
+            public string Title { get; set; }
+            public string AudioFileName { get; set; }
+            public string ImageFileName { get; set; }
+            // VideoFileName, ?
+            public string Notes { get; set; }
+            //public string GetAudioFile() => FileNames.SingleOrDefault(fn => AudioSuffixes.Contains(fn));\
+            public bool IsUseful { get { return AudioFileName != null || ImageFileName != null; } }
         }
-        public DirMgr()
+        public DirMgr(string dir, string refRoot)
         {
+            this.Dir = dir;
+            this.Title = Dir.DirLeaf();
+
+            if (File.Exists($"{dir}Notes.html"))
+                Notes = File.ReadAllText($"{dir}Notes.html");
+
+            var files = (from f in Directory.GetFiles(Dir).ToArray()
+                         let fName = Path.GetFileNameWithoutExtension(f)
+                         let fExt = Path.GetExtension(f.ToLower())
+                         group f by fName into g            //var dirNames = Directory.GetDirectories(dir).Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
+                         select new { FileName = g.Key, Exts = g.Select(f => Path.GetExtension(f)).ToList() }// g.Select(f=>f.FileExt).To}
+                        ).ToList();
+
+            Files = new List<FileSet>();
+            foreach (var f in files)
+            {
+                var fs = new FileSet() { Title = f.FileName };
+                foreach (var e in f.Exts)
+                {
+                    var fname = $"{Dir}{Path.DirectorySeparatorChar}{f.FileName}{e}";
+
+                    if (AudioSuffixes.Contains(e))
+                        fs.AudioFileName = $"{refRoot}{Path.DirectorySeparatorChar}{Path.GetFileName(fname)}";
+                    else if (TextSuffixes.Contains(e))
+                        fs.Notes = File.ReadAllText(fname);
+                    else if (ImageSuffixes.Contains(e))
+                        fs.ImageFileName = Path.GetFileName(fname);
+                }
+                if (fs.IsUseful)
+                    Files.Add(fs);
+            }
+            //this.Dirs = dirNames.Select(d => new CheckboxItem { ID = d, Text = d }).ToList();
             //
             // TODO: Add constructor logic here
             //
         }
+#if false
         public static IEnumerable<string> GetDirNames(HttpServerUtilityBase server, string dir)
         {
             //var dirs = Directory.GetDirectories(dir);
@@ -97,5 +155,6 @@ namespace HoltDan.Models
 
             return new HtmlString(sb.ToString());
         }
+#endif
     }
 }

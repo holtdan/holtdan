@@ -37,6 +37,14 @@ namespace HoltDan
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            var danJsBundle = new ScriptBundle("~/bundles/danJs");
+            danJsBundle.Include(
+                "~/Scripts/DanAudioMgr.js"
+                );
+            danJsBundle.Transforms.Add(jsTransformer);
+            danJsBundle.Orderer = nullOrderer;
+            bundles.Add(danJsBundle);
+
             var cssBundle = new StyleBundle("~/bundles/css");
             cssBundle.Include("~/Content/css",
                       "~/Content/bootstrap.css",

@@ -8,36 +8,24 @@ namespace HoltDan.Models
 {
     public static class HtmlExtensions
     {
-#if false
-        public static MvcHtmlString BELabelValueFormGroup<TModel>(this HtmlHelper<TModel> html,
-                                                       string labelText,
-                                                       string valueText,
-                                                       int leftCol = 2,
-                                                       bool isModal = false)
+        public static MvcHtmlString DanSong<TModel>(this HtmlHelper<TModel> html,
+                                                       string fileName,
+                                                       string title,
+                                                       string notes)
         {
-            var rightCol = 12 - leftCol;
-            var labelClasses = $"control-label col-md-{leftCol} beScreenFieldLabel";
-            var inDivClasses = $"col-md-{rightCol}";
-            //var labelForClasses = "control-label beScreenFieldLabel";
-            //if (isModal) txtBoxClasses += " input-sm";
-
             var inDiv = new TagBuilder("div");
-            inDiv.AddCssClass(inDivClasses);
-            inDiv.InnerHtml += $"<h5>{valueText}</h5>";
-            //$"<span style='vertical-align: middle;'>{valueText}</span>"; //html.TextBoxFor(expression, svsfcm, new { @class = txtBoxClasses, @placeholder = textPlaceHolder }).ToHtmlString();
-            //html.DisplayFor(expression, new { @class = labelForClasses }).ToHtmlString();
+            inDiv.AddCssClass("danSong");
+            inDiv.InnerHtml += $"<div class='danTitle'>{title}</div><div class='danNotes'>{notes}</div>";
+            //var topDiv = new TagBuilder("div");
+            //topDiv.AddCssClass("form-group");
+            //if (isModal) topDiv.AddCssClass("beModalFormGroup");
 
-            var topDiv = new TagBuilder("div");
-            topDiv.AddCssClass("form-group");
-            if (isModal) topDiv.AddCssClass("beModalFormGroup");
+            //topDiv.InnerHtml += html.Label(labelText, new { @class = labelClasses });
+            //topDiv.InnerHtml += inDiv;
 
-            topDiv.InnerHtml += html.Label(labelText, new { @class = labelClasses });
-            topDiv.InnerHtml += inDiv;
-
-            var x = topDiv.ToString();
-            return MvcHtmlString.Create(topDiv.ToString());
+            //var x = topDiv.ToString();
+            return MvcHtmlString.Create(inDiv.ToString());
         }
-#endif
     }
 
 }

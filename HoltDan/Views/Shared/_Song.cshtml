@@ -1,0 +1,12 @@
+﻿@*
+    Displays a single song with a Play button    
+*@
+@model HoltDan.Models.SongViewModel
+
+<div class="danSong">
+    <div>
+        <button class="btn btn-xs btn-default danPlayPauseButton" title="Play" data-fname="@Model.FileName"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
+        <div class="danTitle">@Model.Title</div>
+        <div class="danNotes">@Html.Raw(Model.Notes)</div>
+    </div>
+</div>

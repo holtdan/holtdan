@@ -17,6 +17,7 @@ namespace HoltDan.Controllers
             var photosRoots = Directory.GetDirectories(photosPath).Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
             ViewBag.PhotoRoots = photosRoots;
             ViewBag.MediaRoot = Server.MapPath("~/media/");
+            ViewBag.SongsRoot = Server.MapPath("~/media/Songs/");
             //var vm = new PhotosViewModel(Server, photosRoots, "Family");
 
             base.OnActionExecuting(filterContext);
@@ -66,7 +67,17 @@ namespace HoltDan.Controllers
         }
         public ActionResult Songs(string id)
         {
-            return id == "dan" ? View("SongsMine") : View();
+            if (id=="ds")
+            {
+                return View("DanSongs");
+            }
+
+            var useDir = 
+                id == "cws" ? "Crossword Smile" :
+                id == "sf" ? "Social Function" :
+                id == "bh" ? "The Brothers Holt" : "CRASH!";
+            var dm = new DirMgr(Server.MapPath($"~/media/songs/bands/{useDir}/"), $"/bands/{useDir}");
+            return View("SongAlbum",dm);
         }
     }
 }

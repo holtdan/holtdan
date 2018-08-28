@@ -1,17 +1,65 @@
-﻿body {
+﻿@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+@danActiveColor:  #5cb85c;
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #202020;
     color: lightgray;
 }
-.danDiv{
+.danDiv(){
     border-radius: 5px;
-    padding: 1em;
-    margin: 1em;
-    background-color: #404040;
     border-color: lightgray;
-
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #404040;
+    background-color: #404040;
+    border-style: solid;
+    border-width: 1px;
 }
+.danActive{
+    color: @danActiveColor !important;
+}
+.danTitle{
+    /*font-family:'Dekko, Allerta Stencil,Alegreya Sans SC';*/
+    /*font-family: 'Nova Flat';*/
+    font-family: 'Segoe Print';
+    font-size:x-large;
+    color: white;
+    text-align:center;
+    display: inline-block;
+}
+.danNotes{
+    margin-top: 5px;
+}
+.danSong{
+    .danDiv;
+    width: 100%;
+}
+.danSongAlbum{
+    .danSong;
+    border-style: solid;
+    border-width: 1px;
+}
+.danButton{
+    margin-right: 10px;
+}
+.danPlayPauseButton{
+    .danButton;
+    min-height: 30px;
+    min-width: 40px;
+}
+.danPlayPauseButtonActive{
+    animation: danThrob 2s infinite;
+    color: @danActiveColor;
+}
+/*.danButton:hover{
+    font-size:large;
+}
+.danButton:active{
+    font-size:smaller;
+}*/
 .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
     background-color: #3344ff;
     color:#ffffff;
@@ -79,5 +127,17 @@ img.ri:empty
 @media screen and (orientation: landscape) {
   img.ri {
       max-height: 90%;
+  }
+}
+
+@keyframes danThrob{
+    0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }

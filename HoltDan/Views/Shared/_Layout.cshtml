@@ -10,6 +10,7 @@
 </head>
 @{
     var photosRoots = ViewBag.PhotoRoots as List<string>;
+    var mediaRoot = ViewBag.MediaRoot as string;
 }
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -38,9 +39,12 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Music<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Dan", "Songs", "Home", new { @id = "dan" }, null)</li>
-                            <li><a href="http://www.holtdan.com/media/guitar/guitarcomp.html/" target="_blank">Guitar Comp Sheet 1</a></li>
-                            <li><a href="http://www.holtdan.com/media/guitar/guitarcomp2.html/" target="_blank">Guitar Comp Sheet 2</a></li>
+                            <li>@Html.ActionLink("Dan Songs", "Songs", "Home", new { @id = "ds" }, null)</li>
+                            <li>@Html.ActionLink("Social Function", "Songs", "Home", new { @id = "sf" }, null)</li>
+                            <li>@Html.ActionLink("Crossword Smile", "Songs", "Home", new { @id = "cws" }, null)</li>
+                            <li>@Html.ActionLink("The Brothers Holt", "Songs", "Home", new { @id = "bh" }, null)</li>
+                            <li><a href="/media/guitar/guitarcomp.html/" target="_blank">Guitar Comp Sheet 1</a></li>
+                            <li><a href="/media/guitar/guitarcomp2.html/" target="_blank">Guitar Comp Sheet 2</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -54,6 +58,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/danJs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
