@@ -51,6 +51,7 @@ namespace HoltDan.Models
         {
             public string Title { get; set; }
             public string AudioFileName { get; set; }
+            public int SecondsDuration { get; set; }
             public string ImageFileName { get; set; }
             // VideoFileName, ?
             public string Notes { get; set; }
@@ -81,7 +82,12 @@ namespace HoltDan.Models
                     var fname = $"{Dir}{Path.DirectorySeparatorChar}{f.FileName}{e}";
 
                     if (AudioSuffixes.Contains(e))
+                    {
                         fs.AudioFileName = $"{refRoot}{Path.DirectorySeparatorChar}{Path.GetFileName(fname)}";
+
+                        TagLib.File taglibFile = TagLib.File.Create(fname, TagLib.ReadStyle.Average);
+                        fs.SecondsDuration = (int)taglibFile.Properties.Duration.TotalSeconds;
+                    }
                     else if (TextSuffixes.Contains(e))
                         fs.Notes = File.ReadAllText(fname);
                     else if (ImageSuffixes.Contains(e))

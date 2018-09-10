@@ -31,12 +31,16 @@ namespace HoltDan.Models
         public string Notes { get; set; }
         [Display(Name = "File Name")]
         public string FileName { get; set; }
+        public int SecondsDuration { get; set; }
+        public string DurationFormatted() => $"{(int)(SecondsDuration/60)}:{(SecondsDuration%60).ToString("00")}";
+
         public SongViewModel() { }
-        public SongViewModel(string fileName, string title, string notes)
+        public SongViewModel(string fileName, string title, string notes, int secondsDurarion)
         {
             FileName = fileName;
             Title = title;
             Notes = notes;
+            SecondsDuration = secondsDurarion;
         }
     }
 }

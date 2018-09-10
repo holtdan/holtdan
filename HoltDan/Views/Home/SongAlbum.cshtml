@@ -12,7 +12,7 @@
         <div class="danNotes">@Model.Notes</div>
         @foreach (var f in Model.Files)
         {
-            Html.RenderPartial("_Song", new SongViewModel(f.AudioFileName, f.Title, f.Notes));
+            Html.RenderPartial("_Song", new SongViewModel(f.AudioFileName, f.Title, f.Notes, f.SecondsDuration));
         }
     </div>
 </div>
@@ -22,18 +22,29 @@
 @section Scripts
 {
 <script type="text/javascript">
-    let audioMgr = new DanAudioMgr("audioPlayer",
-        function (triggerElem, eventName) {
+    let audioMgr = new DanAudioMgr("audioPlayer", ".danSongAlbum",
+        function (triggerElem, eventName, currSecs) {
             var $t = $(triggerElem);
             var $p = $t.closest(".danSong");
             var $title = $p.find(".danTitle");
+            var $prog = $p.find(".danProgress");
+            var $bar = $p.find(".danProgressBar");
             if (eventName == "onplay") {
-                $title.addClass("danActive")
+                $(".danPlayPauseButtonActive").removeClass("danPlayPauseButtonActive")
+                //$(".danProgress").css("display", "none")
+                $title.addClass("danPlayPauseButtonActive")
+
+                $bar.width = 0;
+                $prog.addClass("danProgressShow")
             }
-            else if (eventName == "onstop") {
-                $title.removeClass("danActive")
+            else if (eventName == "onstop" || eventName == "onended") {
+                $title.removeClass("danPlayPauseButtonActive")
+                $prog.removeClass("danProgressShow").addClass("danProgressHide")
             }
-            debugger;
+            else if (eventName == "ontimeupdate") {
+                var totSecs = $t.data("secsdur")
+                $bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
+            }
         });
 </script>
 }

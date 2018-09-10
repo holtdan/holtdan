@@ -1,12 +1,16 @@
-﻿@import "bootstrap/variables";
-@import "bootstrap/mixins";
+﻿/*@import "bootstrap/variables";
+@import "bootstrap/mixins";*/
 
-@danActiveColor:  #5cb85c;
+@danActiveColor:  lightgray;
+@danActiveColorPeak:  white;
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #202020;
     color: lightgray;
+    /*font-family:'Dekko, Allerta Stencil,Alegreya Sans SC';*/
+    /*font-family: 'Nova Flat';*/
+    font-family: 'Segoe Print';
 }
 .danDiv(){
     border-radius: 5px;
@@ -22,9 +26,7 @@ body {
     color: @danActiveColor !important;
 }
 .danTitle{
-    /*font-family:'Dekko, Allerta Stencil,Alegreya Sans SC';*/
-    /*font-family: 'Nova Flat';*/
-    font-family: 'Segoe Print';
+    margin-top: 5px;
     font-size:x-large;
     color: white;
     text-align:center;
@@ -51,8 +53,29 @@ body {
     min-width: 40px;
 }
 .danPlayPauseButtonActive{
-    animation: danThrob 2s infinite;
+    transform-origin: left center;
+    animation: danThrob 3s infinite;
     color: @danActiveColor;
+}
+.danProgressShow{
+    display: inline-block;
+    animation: danProgBarReveal 2s forwards;
+}
+.danProgressHide{
+    animation: danProgBarHide 2s;
+}
+@progBarWidth: 100px;
+.danProgress{
+    display: inline-block;
+    width: 0px;
+    margin-top: 5px;
+    margin-right: 10px;
+    background-color: gray;
+}
+.danProgressBar {
+    width: 1%;
+    height: 10px;
+    background-color: @danActiveColor;
 }
 /*.danButton:hover{
     font-size:large;
@@ -133,11 +156,36 @@ img.ri:empty
 @keyframes danThrob{
     0% {
     transform: scale(1);
+    color: @danActiveColor;
   }
   60% {
     transform: scale(1.5);
+    color: @danActiveColorPeak;
   }
   100% {
     transform: scale(1);
+    color: @danActiveColor;
+  }
+}
+@keyframes danProgBarReveal{
+    0% {
+    width: 0;
+  }
+  40% {
+    width: 80px;
+  }
+  60% {
+    width: 40px;
+  }
+  100% {
+    width: @progBarWidth;
+  }
+}
+@keyframes danProgBarHide{
+    0% {
+    width: @progBarWidth;
+  }
+  100% {
+    width: 0;
   }
 }
