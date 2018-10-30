@@ -25,6 +25,8 @@ namespace HoltDan.Models
     }
     public class SongViewModel
     {
+        [Display(Name = "Track Number")]
+        public int TrackNum { get; set; }
         [Display(Name = "Title")]
         public string Title { get; set; }
         [Display(Name = "Notes")]
@@ -35,8 +37,9 @@ namespace HoltDan.Models
         public string DurationFormatted() => $"{(int)(SecondsDuration/60)}:{(SecondsDuration%60).ToString("00")}";
 
         public SongViewModel() { }
-        public SongViewModel(string fileName, string title, string notes, int secondsDurarion)
+        public SongViewModel(int trackNum, string fileName, string title, string notes, int secondsDurarion)
         {
+            TrackNum = trackNum;
             FileName = fileName;
             Title = title;
             Notes = notes;

@@ -390,6 +390,7 @@
     <Content Include="Views\Home\DanSongs.cshtml" />
     <Content Include="Views\Shared\_DanSongAlbum.cshtml" />
     <Content Include="Views\Home\SongAlbum.cshtml" />
+    <Content Include="Views\Home\Guitars.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

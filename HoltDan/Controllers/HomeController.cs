@@ -54,10 +54,8 @@ namespace HoltDan.Controllers
             ViewBag.HoldSeconds = (int)TimeSpan.Parse(vm.IntervalSpan).TotalSeconds;
             return View(vm.BuildShow(Server.MapPath($"~/media/Photos/")));
         }
-        public ActionResult About()
+        public ActionResult Guitars()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -75,7 +73,9 @@ namespace HoltDan.Controllers
             var useDir = 
                 id == "cws" ? "Crossword Smile" :
                 id == "sf" ? "Social Function" :
-                id == "bh" ? "The Brothers Holt" : "CRASH!";
+                id == "bh" ? "The Brothers Holt" :
+                id == "test" ? "test"
+                : "CRASH!";
             var dm = new DirMgr(Server.MapPath($"~/media/songs/bands/{useDir}/"), $"/bands/{useDir}");
             return View("SongAlbum",dm);
         }

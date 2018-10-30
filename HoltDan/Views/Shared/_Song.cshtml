@@ -5,7 +5,7 @@
 
 <div class="danSong">
     <div>
-        <button class="btn btn-xs btn-default danPlayPauseButton" title="Play" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
+        <button class="btn btn-xs btn-default danPlayPauseButton" title="Play" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
         <div class="danTitle">@Model.Title</div>
         <div class="danPlayback"><div class="danProgress"><div class="danProgressBar"></div></div>@Model.DurationFormatted()</div>
         <div class="danNotes">@Html.Raw(Model.Notes)</div>

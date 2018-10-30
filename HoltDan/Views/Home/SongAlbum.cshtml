@@ -1,5 +1,5 @@
-﻿@* 
-    Displays a Folder's Notes.html fils and all the songs    
+﻿@*
+    Displays a Folder's Notes.html fils and all the songs
 *@
 @model HoltDan.Models.DirMgr
 
@@ -7,12 +7,16 @@
     ViewBag.Title = "SongAlbum";
 }
 <div class="danSongAlbum">
+    <button class="btn btn-xs btn-default danPlayPauseButton danPlayPauseAllButton" title="Play All"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
     <div class="danTitle">@Model.Title</div>
     <div class="danDiv">
         <div class="danNotes">@Model.Notes</div>
-        @foreach (var f in Model.Files)
-        {
-            Html.RenderPartial("_Song", new SongViewModel(f.AudioFileName, f.Title, f.Notes, f.SecondsDuration));
+        @{
+            var trackNum = 0;
+            foreach (var f in Model.Files)
+            {
+                Html.RenderPartial("_Song", new SongViewModel(trackNum++, f.AudioFileName, f.Title, f.Notes, f.SecondsDuration));
+            }
         }
     </div>
 </div>
@@ -21,30 +25,30 @@
 </audio>
 @section Scripts
 {
-<script type="text/javascript">
-    let audioMgr = new DanAudioMgr("audioPlayer", ".danSongAlbum",
-        function (triggerElem, eventName, currSecs) {
-            var $t = $(triggerElem);
-            var $p = $t.closest(".danSong");
-            var $title = $p.find(".danTitle");
-            var $prog = $p.find(".danProgress");
-            var $bar = $p.find(".danProgressBar");
-            if (eventName == "onplay") {
-                $(".danPlayPauseButtonActive").removeClass("danPlayPauseButtonActive")
-                //$(".danProgress").css("display", "none")
-                $title.addClass("danPlayPauseButtonActive")
+    <script type="text/javascript">
+        let audioMgr = new DanAudioMgr("audioPlayer", ".danSongAlbum",
+            function (triggerElem, eventName, currSecs) {
+                var $t = $(triggerElem);
+                var $p = $t.closest(".danSong");
+                var $title = $p.find(".danTitle");
+                var $prog = $p.find(".danProgress");
+                var $bar = $p.find(".danProgressBar");
+                if (eventName == "onplay") {
+                    $(".danPlayPauseButtonActive").removeClass("danPlayPauseButtonActive")
+                    //$(".danProgress").css("display", "none")
+                    $title.addClass("danPlayPauseButtonActive")
 
-                $bar.width = 0;
-                $prog.addClass("danProgressShow")
-            }
-            else if (eventName == "onstop" || eventName == "onended") {
-                $title.removeClass("danPlayPauseButtonActive")
-                $prog.removeClass("danProgressShow").addClass("danProgressHide")
-            }
-            else if (eventName == "ontimeupdate") {
-                var totSecs = $t.data("secsdur")
-                $bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
-            }
-        });
-</script>
+                    $bar.width = 0;
+                    $prog.addClass("danProgressShow")
+                }
+                else if (eventName == "onstop" || eventName == "onended") {
+                    $title.removeClass("danPlayPauseButtonActive")
+                    $prog.removeClass("danProgressShow").addClass("danProgressHide")
+                }
+                else if (eventName == "ontimeupdate") {
+                    var totSecs = $t.data("secsdur")
+                    $bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
+                }
+            });
+    </script>
 }
