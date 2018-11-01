@@ -15,26 +15,21 @@ var DanSongAlbum = (function () {
             var $t = $(item);
             var $btn = $t.find(".danPlayPauseButton").first();
             var sng = {
+                trackNum: parseInt($t.data("tracknum")),
+                fileName: $t.data("fname"),
+                secsDur: parseInt($t.data("secsdur")),
                 $danSong: $t,
                 $title: $t.find(".danTitle").first(),
                 $button: $btn,
                 $btnGlyph: $btn.find("b"),
-                trackNum: parseInt($btn.data("tracknum")),
-                fileName: $btn.data("fname"),
-                secsDur: parseInt($btn.data("secsdur")),
                 $prog: $t.find(".danProgress").first(),
                 $bar: $t.find(".danProgressBar").first()
             };
             return sng;
         });
     }
-    //private ButtonIsCurrent(button: JQuery): boolean {
-    //    if (!this.getCurSong) return false;
-    //    let inFN = button.data("fname")
-    //    return this.getCurSong.fileName == inFN;
-    //}
     /**
-     * Always a current song.
+     * Always a current song!
      */
     DanSongAlbum.prototype.getCurSong = function () {
         var cs = this.songs[this.curSongIdx];
@@ -126,12 +121,12 @@ var DanAudioMgr = (function () {
                     self.player.pause();
             }
             else {
-                var trackNum = $(this).data("tracknum");
-                //let clkSong = self.album.getSong(trackNum);
+                var $selSng = $(this).closest(".danSong");
+                var trackNum = $selSng.data("tracknum");
                 var sng = self.album.getCurSong();
                 if (sng.trackNum != trackNum) {
                     self.setCurrentStopped();
-                    self.playThis(sng);
+                    self.playThis(self.album.setCurSong(trackNum));
                 }
                 else {
                     if (self.player.paused)

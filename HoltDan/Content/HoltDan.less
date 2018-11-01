@@ -44,18 +44,55 @@ body {
     border-style: solid;
     border-width: 1px;
 }
+.danTransport {
+    display: inline-block;
+    width: 140px;
+    height: 50px;
+}
 .danButton{
     margin-right: 10px;
 }
-.danPlayPauseButton{
-    .danButton;
-    min-height: 30px;
-    min-width: 40px;
+.danMediaButton{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0);
+    padding-top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+.danMediaButton:hover{
+    border-color: lightgray;
+}
+.danPlayPauseButton {
+    .danMediaButton;
+}
+.danPrevMediaButton .danNextMediaButton{
+    .danMediaButton;
+    transform: scale(0);
 }
 .danPlayPauseButtonActive{
     transform-origin: left center;
     animation: danThrob 3s infinite;
     color: @danActiveColor;
+}
+.danScaleIn{
+    animation: scaleIn 1s linear forwards;
+}
+.danScaleOut{
+    animation: scaleOut 1s linear forwards;
+}
+@keyframes scaleIn{
+    from{transform: scale(0);}
+    to{transform: scale(1);}
+}
+@keyframes scaleOut{
+    from{transform: scale(1);}
+    to{transform: scale(0);}
 }
 .danProgressShow{
     display: inline-block;
@@ -76,6 +113,42 @@ body {
     width: 1%;
     height: 10px;
     background-color: @danActiveColor;
+}
+@keyframes danThrob{
+    0% {
+    transform: scale(1);
+    color: @danActiveColor;
+  }
+  60% {
+    transform: scale(1.5);
+    color: @danActiveColorPeak;
+  }
+  100% {
+    transform: scale(1);
+    color: @danActiveColor;
+  }
+}
+@keyframes danProgBarReveal{
+    0% {
+    width: 0;
+  }
+  40% {
+    width: 80px;
+  }
+  60% {
+    width: 40px;
+  }
+  100% {
+    width: @progBarWidth;
+  }
+}
+@keyframes danProgBarHide{
+    0% {
+    width: @progBarWidth;
+  }
+  100% {
+    width: 0;
+  }
 }
 /*.danButton:hover{
     font-size:large;
@@ -150,42 +223,5 @@ img.ri:empty
 @media screen and (orientation: landscape) {
   img.ri {
       max-height: 90%;
-  }
-}
-
-@keyframes danThrob{
-    0% {
-    transform: scale(1);
-    color: @danActiveColor;
-  }
-  60% {
-    transform: scale(1.5);
-    color: @danActiveColorPeak;
-  }
-  100% {
-    transform: scale(1);
-    color: @danActiveColor;
-  }
-}
-@keyframes danProgBarReveal{
-    0% {
-    width: 0;
-  }
-  40% {
-    width: 80px;
-  }
-  60% {
-    width: 40px;
-  }
-  100% {
-    width: @progBarWidth;
-  }
-}
-@keyframes danProgBarHide{
-    0% {
-    width: @progBarWidth;
-  }
-  100% {
-    width: 0;
   }
 }

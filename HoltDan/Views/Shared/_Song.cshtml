@@ -3,9 +3,19 @@
 *@
 @model HoltDan.Models.SongViewModel
 
-<div class="danSong">
+<div class="danSong" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName">
     <div>
-        <button class="btn btn-xs btn-default danPlayPauseButton" title="Play" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
+        <div class="danTransport">
+            <div class="danMediaButton danPrevMediaButton">
+                <b class="glyphicon glyphicon-fast-backward"></b>
+            </div>
+            <div class="danMediaButton danPlayPauseButton">
+                <b class="glyphicon glyphicon-play"></b>
+            </div>
+            <div class="danMediaButton danNextMediaButton">
+                <b class="glyphicon glyphicon-fast-forward"></b>
+            </div>
+        </div>
         <div class="danTitle">@Model.Title</div>
         <div class="danPlayback"><div class="danProgress"><div class="danProgressBar"></div></div>@Model.DurationFormatted()</div>
         <div class="danNotes">@Html.Raw(Model.Notes)</div>

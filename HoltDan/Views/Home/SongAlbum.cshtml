@@ -2,12 +2,21 @@
     Displays a Folder's Notes.html fils and all the songs
 *@
 @model HoltDan.Models.DirMgr
-
 @{
     ViewBag.Title = "SongAlbum";
 }
 <div class="danSongAlbum">
-    <button class="btn btn-xs btn-default danPlayPauseButton danPlayPauseAllButton" title="Play All"><b class="glyphicon glyphicon-play" style="font-size:large"></b></button>
+    <div class="danTransport">
+        <div class="danMediaButton danPrevMediaButton">
+            <b class="glyphicon glyphicon-fast-backward"></b>
+        </div>
+        <div class="danMediaButton danPlayPauseButton  danPlayPauseAllButton">
+            <b class="glyphicon glyphicon-play"></b>
+        </div>
+        <div class="danMediaButton danNextMediaButton">
+            <b class="glyphicon glyphicon-fast-forward"></b>
+        </div>
+    </div>
     <div class="danTitle">@Model.Title</div>
     <div class="danDiv">
         <div class="danNotes">@Model.Notes</div>
@@ -50,5 +59,18 @@
                     $bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
                 }
             });
-    </script>
+        var first = true;
+        $(".danPlayPauseButton").click(function () {
+            //alert("Click!")
+            if (first) {
+                $(".danPrevMediaButton,.danNextMediaButton").removeClass("danScaleOut")
+                $(".danPrevMediaButton,.danNextMediaButton").addClass("danScaleIn")
+            }
+            else {
+                $(".danPrevMediaButton,.danNextMediaButton").removeClass("danScaleIn")
+                $(".danPrevMediaButton,.danNextMediaButton").addClass("danScaleOut")
+            }
+            first = !first;
+        })
+        </script>
 }
