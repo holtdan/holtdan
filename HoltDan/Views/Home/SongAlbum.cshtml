@@ -6,25 +6,23 @@
     ViewBag.Title = "SongAlbum";
 }
 <div class="danSongAlbum">
+    <div class="danNotes">@Html.Raw(Model.Notes)</div>
     <div class="danTransport">
-        <div class="danMediaButton danPrevMediaButton">
-            <b class="glyphicon glyphicon-fast-backward"></b>
-        </div>
         <div class="danMediaButton danPlayPauseButton  danPlayPauseAllButton">
             <b class="glyphicon glyphicon-play"></b>
-        </div>
-        <div class="danMediaButton danNextMediaButton">
-            <b class="glyphicon glyphicon-fast-forward"></b>
         </div>
     </div>
     <div class="danTitle">@Model.Title</div>
     <div class="danDiv">
-        <div class="danNotes">@Model.Notes</div>
         @{
             var trackNum = 0;
             foreach (var f in Model.Files)
             {
-                Html.RenderPartial("_Song", new SongViewModel(trackNum++, f.AudioFileName, f.Title, f.Notes, f.SecondsDuration));
+                if (f.AudioFileInfo != null) // not some file laying around
+                {
+                    var useTitle = string.IsNullOrWhiteSpace(f.AudioFileInfo.Title) ? f.AudioFileName : f.AudioFileInfo.Title;
+                    Html.RenderPartial("_Song", new SongViewModel(trackNum++, useTitle, f.Title, f.Notes, f.SecondsDuration));
+                }
             }
         }
     </div>

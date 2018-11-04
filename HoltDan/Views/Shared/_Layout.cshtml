@@ -39,13 +39,18 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Music<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Dan Songs", "Songs", "Home", new { @id = "ds" }, null)</li>
-                            <li>@Html.ActionLink("Social Function", "Songs", "Home", new { @id = "sf" }, null)</li>
-                            <li>@Html.ActionLink("Crossword Smile", "Songs", "Home", new { @id = "cws" }, null)</li>
-                            #if DEBUG
-                            <li>@Html.ActionLink("Test", "Songs", "Home", new { @id = "test" }, null)</li>
-                            #endif
-                            <li>@Html.ActionLink("The Brothers Holt", "Songs", "Home", new { @id = "bh" }, null)</li>
+                            <li>Dan Songs</li>
+                            <li>@Html.ActionLink("201X", "Songs", "Home", new { @album = "201x" }, null)</li>
+                            <li>@Html.ActionLink("2 2000", "Songs", "Home", new { @album = "2 2000" }, null)</li>
+                            <li>@Html.ActionLink("Big Bang Theory ... And Then Some", "Songs", "Home", new { @album = "Big Bang Theory ... And Then Some" }, null)</li>
+                            <li>@Html.ActionLink("1986 - 1989", "Songs", "Home", new { @album = "1986 - 1989" }, null)</li>
+                            <li>@Html.ActionLink("1984 - 1986", "Songs", "Home", new { @album = "1984 - 1986" }, null)</li>
+                            <li role="separator" class="divider"></li>
+                            <li>Dan Bands</li>
+                            <li>@Html.ActionLink("Social Function", "Songs", "Home", new { @album = "bands/Social Function" }, null)</li>
+                            <li>@Html.ActionLink("Crossword Smile", "Songs", "Home", new { @album = "bands/Crossword Smile" }, null)</li>
+                            <li>@Html.ActionLink("The Brothers Holt", "Songs", "Home", new { @album = "bands/The Brothers Holt" }, null)</li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="http://www.holtdan.com/media/guitar/guitarcomp.html/" target="_blank">Guitar Comp Sheet 1</a></li>
                             <li><a href="http://www.holtdan.com/media/guitar/guitarcomp2.html/" target="_blank">Guitar Comp Sheet 2</a></li>
                         </ul>

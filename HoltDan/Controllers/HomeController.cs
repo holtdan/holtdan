@@ -63,20 +63,12 @@ namespace HoltDan.Controllers
         {
             return View();
         }
-        public ActionResult Songs(string id)
+        public ActionResult Songs(string album)
         {
-            if (id=="ds")
-            {
-                return View("DanSongs");
-            }
+            if (album.StartsWith("bands_"))
+                album = album.Replace("bands_", "bands/");
 
-            var useDir = 
-                id == "cws" ? "Crossword Smile" :
-                id == "sf" ? "Social Function" :
-                id == "bh" ? "The Brothers Holt" :
-                id == "test" ? "test"
-                : "CRASH!";
-            var dm = new DirMgr(Server.MapPath($"~/media/songs/bands/{useDir}/"), $"/bands/{useDir}");
+            var dm = new DirMgr(Server.MapPath($"~/media/songs/{album}/"), $"{album}");
             return View("SongAlbum",dm);
         }
     }

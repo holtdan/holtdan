@@ -47,6 +47,12 @@ namespace HoltDan.Models
                 }
             }
 
+        public class AudioFileInfo
+        {
+            public int TrackNum { get; set; }
+            public string Title { get; set; }
+            public string Album { get; set; }
+        }
         public class FileSet
         {
             public string Title { get; set; }
@@ -57,6 +63,8 @@ namespace HoltDan.Models
             public string Notes { get; set; }
             //public string GetAudioFile() => FileNames.SingleOrDefault(fn => AudioSuffixes.Contains(fn));\
             public bool IsUseful { get { return AudioFileName != null || ImageFileName != null; } }
+
+            public AudioFileInfo AudioFileInfo { get; set; }
         }
         public DirMgr(string dir, string refRoot)
         {
@@ -87,6 +95,13 @@ namespace HoltDan.Models
 
                         TagLib.File taglibFile = TagLib.File.Create(fname, TagLib.ReadStyle.Average);
                         fs.SecondsDuration = (int)taglibFile.Properties.Duration.TotalSeconds;
+                        fs.AudioFileInfo = new AudioFileInfo
+                        {
+                            TrackNum = (int)taglibFile.Tag.Track,
+                            Album = taglibFile.Tag.Album,
+                            Title = taglibFile.Tag.Title
+                        };
+
                     }
                     else if (TextSuffixes.Contains(e))
                         fs.Notes = File.ReadAllText(fname);
