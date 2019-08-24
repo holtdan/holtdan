@@ -21,7 +21,7 @@
                 if (f.AudioFileInfo != null) // not some file laying around
                 {
                     var useTitle = string.IsNullOrWhiteSpace(f.AudioFileInfo.Title) ? f.AudioFileName : f.AudioFileInfo.Title;
-                    Html.RenderPartial("_Song", new SongViewModel(trackNum++, useTitle, f.Title, f.Notes, f.SecondsDuration));
+                    Html.RenderPartial("_Song", new SongViewModel(trackNum++, f.AudioFileName, useTitle, f.Notes, f.SecondsDuration));
                 }
             }
         }

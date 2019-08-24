@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoltDan", "HoltDan\HoltDan.csproj", "{409914E9-0E2B-4F07-9EDC-A1A524A54FBD}"
 EndProject
@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E969AC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2845192-0B7D-4626-8D5A-0A244C4E93B9}"
 	ProjectSection(SolutionItems) = preProject
+		HoltDan\htmlPlayerEvents.jpeg = HoltDan\htmlPlayerEvents.jpeg
 		HoltDan\media.zip = HoltDan\media.zip
 	EndProjectSection
 EndProject
@@ -36,5 +37,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63DD5B91-71B0-4576-A2E5-7DD274D38E67}
 	EndGlobalSection
 EndGlobal

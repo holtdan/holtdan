@@ -87,7 +87,9 @@ class DanAudioMgr {
         self.player.src = "/media/songs/" + self.album.getCurSong().fileName; // prime the pump!
 
         // browser can start playing
-        // oncanplay ----------------------------
+        this.player.oncanplay = function () {
+            console.log("oncanplay");
+        };
         // media has been started or is no longer paused
         this.player.onplay = function () {
             let sng = self.album.getCurSong();
@@ -100,6 +102,9 @@ class DanAudioMgr {
         };
         // media is playing after paused or stopped for buffering
         // onplaying -------------------------
+        this.player.onplaying = function () {
+                    console.log("onplaying");
+        };
         // media has paused
         this.player.onpause = function () {
             //debugger;
@@ -126,13 +131,9 @@ class DanAudioMgr {
             //if (self.eventCallback) self.eventCallback(self.$btnPlaying, "ontimeupdate", secs);
         };
         // browser started looking for media
-        //this.player.onloadstart = function () {
-        //debugger;
-        //}
-        // browser can start playing
-        //this.player.oncanplay = function () {
-        //    debugger;
-        //}
+        this.player.onloadstart = function () {
+            console.log("onloadstart");
+        }
         $(".danPlayPauseButton").click(function () {
             //debugger;
             if ($(this).hasClass("danPlayPauseAllButton")){
