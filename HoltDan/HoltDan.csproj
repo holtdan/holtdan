@@ -29,6 +29,7 @@
     </NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -245,7 +246,16 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\hands\hand-exercise-fist-to-fan.jpg" />
+    <Content Include="images\hands\hand-exercise-grip.jpg" />
+    <Content Include="images\hands\hand-exercise-shake-it-out.jpg" />
+    <Content Include="images\hands\hand-exercise-thumb-flexion.jpg" />
+    <Content Include="images\hands\hand-exercise-thumb-touches.jpg" />
+    <Content Include="images\hands\hand-exercise-wrist-flexion-extension.jpg" />
+    <Content Include="images\hands\hand-exercise-wrist-flexion-extension2.jpg" />
+    <Content Include="images\hands\hand-exercise-wrist-stretch.jpg" />
     <Content Include="images\Logo.png" />
+    <Content Include="images\zen\breathe.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\hurryup.ttf" />
@@ -391,6 +401,8 @@
     <Content Include="Views\Shared\_DanSongAlbum.cshtml" />
     <Content Include="Views\Home\SongAlbum.cshtml" />
     <Content Include="Views\Home\Guitars.cshtml" />
+    <Content Include="Views\Home\Hands.cshtml" />
+    <Content Include="Views\Home\Zen.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

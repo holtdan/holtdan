@@ -1,0 +1,99 @@
+﻿@helper Exercise(string title, string img, int secs, int reps, string notes)
+{
+    <div class="exercise">
+        <div class="row">
+            <img class="exerciseImg" alt="@title" src="@Url.Content("~/images/hands/" +img)">
+            <button class="exerciseStart btn-default" data-secs="@secs.ToString()" data-reps="@reps.ToString()">@title</button>
+            <p>
+                @notes
+            </p>
+        </div>
+    </div>
+}
+@section Styles
+{
+    <style>
+        .exercise {
+            display: block;
+            margin: 15px;
+        }
+        .exerciseImg {
+            float: left;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .counterDiv {
+            display: inline-block;
+            min-height: 60px;
+        }
+
+        .counterCnt {
+            font-size: 48px;
+            text-align: center;
+            min-width: 100px;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-sm-1">
+        <div class="counterDiv">Hold<div class="counterCnt" id="secs"></div></div>
+    </div>
+    <div class="col-sm-1">
+        <div class="counterDiv">Reps<div class="counterCnt" id="reps"></div></div>
+    </div>
+</div>
+<div id="exercises">
+    @Exercise("Shake It Out","hand-exercise-shake-it-out.jpg", 15, 1, "Repeat up to 3 times.")
+    @Exercise("Fist To Fan","hand-exercise-fist-to-fan.jpg", 6, 5, "2 seconds each position")
+    @Exercise("Thumb Touches","hand-exercise-thumb-touches.jpg", 4, 5, "")
+    @Exercise("Wrist Stretch","hand-exercise-wrist-stretch.jpg", 10, 10, "5x each hand")
+    @Exercise("Thumb Flexion","hand-exercise-thumb-flexion.jpg", 10, 10, "")
+    @Exercise("Wrist Flexion Extension 2","hand-exercise-wrist-flexion-extension2.jpg", 20, 5, "10 sec claw, 10 sec open")
+    @Exercise("Wrist Flexion Extension","hand-exercise-wrist-flexion-extension.jpg", 30, 3, "each hand - 15 sec up, 15 down")
+    @Exercise("Grip","hand-exercise-grip.jpg", 20, 2, "Squeeze and release the gripper using all four fingers and thumb in rapid succession")
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var totSecs = 0;
+        var reps = 0;
+        var secs = 0;
+        var done = true;
+        setInterval(function () {
+
+            if (done)
+                return;
+
+            var secsStr = secs;
+            var repsStr = reps;
+
+            --secs;
+            if (secs < 0) {
+                secsStr = "..."
+                --reps;
+                if (reps < 1) {
+                    done = true;
+                    secsStr = repsStr = "";
+                    $('#exercises').append($('#exercises .exercise:first'));
+                }
+                else
+                    secs = totSecs;
+            }
+            $("#secs").html(secsStr);
+            $("#reps").html(repsStr);
+        }, 1000)
+
+        $(".exerciseImg").click(function () {
+            $(this).siblings("button").click();
+        });
+        $(".exerciseStart").click(function () {
+            done = true;
+            let $this = $(this);
+            setTimeout(function () {
+                totSecs = secs = parseInt($this.data("secs"));
+                reps = parseInt($this.data("reps"));
+                done = false;
+            }, 2000);
+        });
+    </script>
+}

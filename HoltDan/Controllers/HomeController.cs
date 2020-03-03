@@ -71,5 +71,13 @@ namespace HoltDan.Controllers
             var dm = new DirMgr(Server.MapPath($"~/media/songs/{album}/"), $"{album}");
             return View("SongAlbum",dm);
         }
+        public ActionResult Hands()
+        {
+            return View();
+        }
+        public ActionResult Zen()
+        {
+            return View();
+        }
     }
 }
