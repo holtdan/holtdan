@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Scales";
+    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+}
+@section Styles
+{
+    <style>
+        body {
+            background-color: black;
+            padding: 0;
+        }
+        .keySelect {
+            text-align: center;
+            color: black;
+            font-family: "Arial Black", Gadget, sans-serif;
+            padding-top: 5px;
+        }
+
+        .step {
+            text-align: center;
+            color: black;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            background-color: white;
+            border-radius: 5px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            width: 100%;
+        }
+        .interval0 {
+            color: white;
+            background-color: green;
+        }
+        .interval1 {
+            background-color: lightcoral;
+        }
+        .interval2 {
+            background-color: cyan;
+        }
+        .interval3 {
+            color: white;
+            background-color: blue;
+        }
+        .interval4 {
+            color: white;
+            background-color: purple;
+        }
+        .interval5 {
+            background-color: pink;
+        }
+        .interval6 {
+            background-color: tan;
+        }
+    </style>
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("HoltDan", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Key<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @for (int i = 0; i < 12; i++)
+                        {
+                            <li class="keySelect" notes-offset="@i"></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="base">
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        let notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        let steps = [2, 2, 1, 2, 2, 2, 1];
+        let numOcts = 2;
+        let keyIdx = 7;
+        function totalSteps() {
+            return steps.length * numOcts + 1; // +1 = add root at end
+        }
+        function setScale() {
+            $("#base").empty();
+            let curStep = 0;
+            let atIdx = keyIdx;
+            for (var i = 0; i < totalSteps(); i++) {
+                let useIdx = atIdx % notes.length
+                //console.log(' useIdx=' + useIdx + ' atIdx=' + atIdx + ' curStep=' + curStep);
+                let $n = $("<div class='step'>" + notes[useIdx] + "</div>")
+                $n.addClass('interval' + curStep);
+                $("#base").append($n);
+
+                atIdx += steps[curStep];
+
+                if (++curStep > steps.length - 1)
+                    curStep = 0;
+
+                //if (atIdx > notes.length)
+                //    atIdx = keyIdx;
+            }
+        }
+        function scaleScale() {
+            let cx = window.innerWidth;
+            let cy = window.innerHeight;
+            //$("#debug").text(cx + ',' + cy);
+            let cyPer = cy / totalSteps();
+            $(".step").css('height', cyPer + "px")
+            $(".step").css('line-height', cyPer + "px")
+            $(".step").css('font-size',Math.floor(cyPer*.66)+"px")
+        }
+        window.addEventListener('resize', function () {
+            scaleScale();
+        })
+        function setMenus() {
+            $(".keySelect").each(function (index, elem) {
+                let offset = $(elem).data("value");
+                $(elem).text(notes[offset]);
+            })
+        }
+        $(".keySelect").click(function (elem) {
+            let offset = $(elem).attr("notes-offset");
+            keyIdx = parseInt(offset);
+            setScale();
+        })
+        setMenus();
+        setScale();
+        scaleScale();
+    </script>
+}

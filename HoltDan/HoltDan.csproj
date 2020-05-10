@@ -403,6 +403,7 @@
     <Content Include="Views\Home\Guitars.cshtml" />
     <Content Include="Views\Home\Hands.cshtml" />
     <Content Include="Views\Home\Zen.cshtml" />
+    <Content Include="Views\Home\Scales.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

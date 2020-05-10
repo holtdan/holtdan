@@ -79,5 +79,9 @@ namespace HoltDan.Controllers
         {
             return View();
         }
+        public ActionResult Scales()
+        {
+            return View();
+        }
     }
 }
