@@ -3,27 +3,11 @@
         Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
 
         var _notes = new List<string> { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+    var _totalSteps = 15;
     }
     @section Styles
     {
     <style>
-        body {
-            background-color: black;
-            padding: 0;
-        }
-        .step {
-            text-align: center;
-            color: black;
-            font-family: "Arial Black", Gadget, sans-serif;
-            font-weight: bold;
-            font-size: 20px;
-            background-color: white;
-            border-radius: 5px;
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-            width: 100%;
-        }
         .interval0 {
             color: white;
             background-color: green;
@@ -38,16 +22,49 @@
             color: white;
             background-color: blue;
         }
+
         .interval4 {
             color: white;
             background-color: purple;
         }
+
         .interval5 {
             background-color: pink;
         }
+
         .interval6 {
             background-color: tan;
         }
+
+        body {
+            background-color: black;
+            padding: 0;
+        }
+
+        .step {
+            text-align: center;
+            color: black;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 5px;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            width: 100%;
+        }
+        .innerInterval {
+            text-align: center;
+            font-family: "Arial Black", Gadget, sans-serif;
+            height: 100%;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        .noteName {
+        }
+
+
         .optSelect {
             text-align: center;
             font-family: "Arial Black", Gadget, sans-serif;
@@ -57,6 +74,7 @@
             border: 1px solid black;
             border-radius: 5px;
             width: 100%;
+            cursor: pointer;
         }
         .optSelectAccidental {
             background-color: black;
@@ -66,7 +84,7 @@
             width: 10%;
             position: absolute;
             top: 0;
-            left: 0;
+            left: 90%;
         }
 
         #base {
@@ -80,6 +98,18 @@
     }
 </div>
 <div id="base">
+    @for (int i = 0; i < _totalSteps; i++)
+    {
+    <div class="row step interval@(i%7)" id="step@(i)">
+        <div class="col-xs-offset-1 col-xs-1 noteName"></div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 innerInterval interval0" title="root"></div>
+        <div class="col-xs-1 innerInterval interval2" title="3rd"></div>
+        <div class="col-xs-1 innerInterval interval4" title="5th"></div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 innerInterval interval6" title="7th"></div>
+    </div>
+    }
 </div>
 
 @section Scripts
@@ -89,27 +119,38 @@
         let steps = [2, 2, 1, 2, 2, 2, 1];
         let numOcts = 2;
         let keyIdx = 7;
+        let mode = 0;
         function totalSteps() {
-            return steps.length * numOcts + 1; // +1 = add root at end
+            return @_totalSteps;// steps.length * numOcts + 1; // +1 = add root at end
         }
-        function setScale() {
-            $("#base").empty();
-            let curStep = 0;
+        function getNoteString(useNotes, useIdx) {
+            return notes[useNotes[useIdx]];
+        }
+        function getNotes() {
+            let useNotes = new Array();
+            let curStep = mode;
             let atIdx = keyIdx;
-            for (var i = 0; i < totalSteps(); i++) {
+            for (var i = 0; i < steps.length; i++) {
                 let useIdx = atIdx % notes.length
-                //console.log(' useIdx=' + useIdx + ' atIdx=' + atIdx + ' curStep=' + curStep);
-                let $n = $("<div class='step'>" + notes[useIdx] + "</div>")
-                $n.addClass('interval' + curStep);
-                $("#base").append($n);
+                useNotes.push (useIdx);
 
                 atIdx += steps[curStep];
 
                 if (++curStep > steps.length - 1)
-                    curStep = 0;
-
-                //if (atIdx > notes.length)
-                //    atIdx = keyIdx;
+                    curStep = mode;
+            }
+            console.log(useNotes);
+            return useNotes;
+            //debugger;
+        }
+        function setScale() {
+            let useNotes = getNotes();
+            for (var i = 0; i < totalSteps(); i++) {
+                $("#step" + i).find(".noteName").text(getNoteString(useNotes, i % useNotes.length));
+                $("#step" + i).find(".interval0").text(getNoteString(useNotes, i % useNotes.length));
+                $("#step" + i).find(".interval2").text(getNoteString(useNotes, (i + 2) % useNotes.length));
+                $("#step" + i).find(".interval4").text(getNoteString(useNotes, (i + 4) % useNotes.length));
+                $("#step" + i).find(".interval6").text(getNoteString(useNotes, (i+6) % useNotes.length));
             }
             scaleScale();
         }
@@ -120,7 +161,7 @@
             let cyPer = cy / totalSteps();
             $(".step").css('height', cyPer + "px")
             $(".step").css('line-height', cyPer + "px")
-            $(".step").css('font-size',Math.floor(cyPer*.66)+"px")
+            $(".noteName").css('font-size',Math.floor(cyPer*.66)+"px")
         }
         window.addEventListener('resize', function () {
             scaleScale();
@@ -129,6 +170,7 @@
             let offset = $(this).attr("data-key");
             keyIdx = parseInt(offset);
             setScale();
+            getNotes();
         })
         
         setScale();
