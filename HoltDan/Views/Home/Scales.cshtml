@@ -1,21 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Scales";
-    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
-}
-@section Styles
-{
+        ViewBag.Title = "Scales";
+        Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+
+        var _notes = new List<string> { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+    }
+    @section Styles
+    {
     <style>
         body {
             background-color: black;
             padding: 0;
         }
-        .keySelect {
-            text-align: center;
-            color: black;
-            font-family: "Arial Black", Gadget, sans-serif;
-            padding-top: 5px;
-        }
-
         .step {
             text-align: center;
             color: black;
@@ -53,32 +48,36 @@
         .interval6 {
             background-color: tan;
         }
+        .optSelect {
+            text-align: center;
+            font-family: "Arial Black", Gadget, sans-serif;
+            padding-top: 5px;
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .optSelectAccidental {
+            background-color: black;
+            color: white;
+        }
+        .selKey {
+            width: 10%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #base {
+        }
     </style>
 }
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("HoltDan", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Key<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        @for (int i = 0; i < 12; i++)
-                        {
-                            <li class="keySelect" notes-offset="@i"></li>
-                        }
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="selKey">
+    @for (int i = 0; i < _notes.Count(); i++)
+    {
+        <div class="optSelect @(_notes[i].Length > 1 ? "optSelectAccidental" : "")" data-key="@i">@_notes[i]</div>
+    }
 </div>
 <div id="base">
 </div>
@@ -112,6 +111,7 @@
                 //if (atIdx > notes.length)
                 //    atIdx = keyIdx;
             }
+            scaleScale();
         }
         function scaleScale() {
             let cx = window.innerWidth;
@@ -125,19 +125,12 @@
         window.addEventListener('resize', function () {
             scaleScale();
         })
-        function setMenus() {
-            $(".keySelect").each(function (index, elem) {
-                let offset = $(elem).data("value");
-                $(elem).text(notes[offset]);
-            })
-        }
-        $(".keySelect").click(function (elem) {
-            let offset = $(elem).attr("notes-offset");
+        $(".optSelect").click(function (elem) {
+            let offset = $(this).attr("data-key");
             keyIdx = parseInt(offset);
             setScale();
         })
-        setMenus();
+        
         setScale();
-        scaleScale();
     </script>
 }
