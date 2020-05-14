@@ -39,7 +39,8 @@ namespace HoltDan
 
             var danJsBundle = new ScriptBundle("~/bundles/danJs");
             danJsBundle.Include(
-                "~/Scripts/DanAudioMgr.js"
+                "~/Scripts/DanAudioMgr.js",
+                "~/Scripts/DanScales.js"
                 );
             danJsBundle.Transforms.Add(jsTransformer);
             danJsBundle.Orderer = nullOrderer;
@@ -48,8 +49,8 @@ namespace HoltDan
             var cssBundle = new StyleBundle("~/bundles/css");
             cssBundle.Include("~/Content/css",
                       "~/Content/bootstrap.css",
-                      "~/Content/HoltDan.less"/*,
-                      "~/Content/HoltDan.css"*/);
+                      "~/Content/HoltDan.less",
+                      "~/Content/DanScales.less");
             cssBundle.Builder = new NullBuilder();
             cssBundle.Transforms.Add(cssTransformer);
             cssBundle.Orderer = nullOrderer;

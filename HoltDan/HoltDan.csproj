@@ -246,6 +246,10 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\guitar\GuitarChordBox.svg" />
+    <Content Include="images\guitar\GuitarCompHeader.svg" />
+    <Content Include="images\guitar\GuitarNeck.svg" />
+    <Content Include="images\guitar\GuitarTabMeasure.svg" />
     <Content Include="images\hands\hand-exercise-fist-to-fan.jpg" />
     <Content Include="images\hands\hand-exercise-grip.jpg" />
     <Content Include="images\hands\hand-exercise-shake-it-out.jpg" />
@@ -344,6 +348,7 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\DanScales.less" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -404,6 +409,7 @@
     <Content Include="Views\Home\Hands.cshtml" />
     <Content Include="Views\Home\Zen.cshtml" />
     <Content Include="Views\Home\Scales.cshtml" />
+    <Content Include="Views\Shared\_LayoutScales.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -412,6 +418,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\DanAudioMgr.ts" />
+    <TypeScriptCompile Include="Scripts\DanScales.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
