@@ -1,18 +1,19 @@
-﻿@model HoltDan.RouteConfig
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_LayoutScales</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/DanScales.less")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", false)
 </head>
 <body>
-    <div> 
-    </div>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/danJs")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

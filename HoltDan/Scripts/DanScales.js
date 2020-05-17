@@ -31,7 +31,8 @@ var Scales = (function () {
         return this.numOcts * this.steps.length + 1; // +1 = add root at end
     };
     Scales.prototype.getNoteString = function (useNotes, useIdx) {
-        return this.notes[useNotes[useIdx]];
+        var shiftIdx = useIdx % useNotes.length;
+        return this.notes[useNotes[shiftIdx]];
     };
     Scales.prototype.getNotes = function () {
         var useNotes = new Array();
@@ -62,13 +63,18 @@ var Scales = (function () {
     };
     Scales.prototype.setScale = function () {
         var useNotes = this.getNotes();
+        var unLen = useNotes.length;
         for (var i = 0; i < this.totalSteps(); i++) {
-            $("#step" + i).find(".noteName").text(this.getNoteString(useNotes, i % useNotes.length));
-            $("#step" + i).find(".interval0").text(this.getNoteString(useNotes, i % useNotes.length));
-            $("#step" + i).find(".interval2").text(this.getNoteString(useNotes, (i + 2) % useNotes.length));
-            $("#step" + i).find(".interval4").text(this.getNoteString(useNotes, (i + 4) % useNotes.length));
-            $("#step" + i).find(".interval6").text(this.getNoteString(useNotes, (i + 6) % useNotes.length));
-            $("#step" + i).find(".chordForm").text(this.scaleChordForms[i % this.scaleChordForms.length]);
+            var useIdx = useNotes[i % unLen];
+            //let root = this.getNoteString()
+            var $step = $("#step" + i);
+            //$step.find(".noteName").text (this.getNoteString(useNotes, i % useNotes.length));
+            $step.find(".noteName").text(this.getNoteString(useNotes, i));
+            $step.find(".chordForm").text(this.scaleChordForms[i % this.scaleChordForms.length]);
+            $step.find(".root").text(this.getNoteString(useNotes, i));
+            $step.find(".third").text(this.getNoteString(useNotes, i + 2));
+            $step.find(".fifth").text(this.getNoteString(useNotes, i + 4));
+            $step.find(".seventh").text(this.getNoteString(useNotes, i + 6));
         }
         this.scaleScale();
     };

@@ -37,8 +37,9 @@ class Scales {
     private totalSteps() : number {
         return this.numOcts * this.steps.length + 1; // +1 = add root at end
     }
-    private getNoteString(useNotes, useIdx) : string {
-        return this.notes[useNotes[useIdx]];
+    private getNoteString(useNotes: Array<number>, useIdx: number): string {
+        let shiftIdx = useIdx % useNotes.length;
+        return this.notes[useNotes[shiftIdx]];
     }
     private getNotes() : Array<number> {
         let useNotes = new Array();
@@ -71,14 +72,19 @@ class Scales {
     }
     private setScale() {
         let useNotes = this.getNotes();
+        let unLen = useNotes.length;
         for (var i = 0; i < this.totalSteps(); i++) {
-            $("#step" + i).find(".noteName").text (this.getNoteString(useNotes, i % useNotes.length));
-            $("#step" + i).find(".interval0").text(this.getNoteString(useNotes, i % useNotes.length));
-            $("#step" + i).find(".interval2").text(this.getNoteString(useNotes, (i + 2) % useNotes.length));
-            $("#step" + i).find(".interval4").text(this.getNoteString(useNotes, (i + 4) % useNotes.length));
-            $("#step" + i).find(".interval6").text(this.getNoteString(useNotes, (i + 6) % useNotes.length));
+            let useIdx = useNotes[i % unLen];
+            //let root = this.getNoteString()
+            let $step = $("#step" + i)
 
-            $("#step" + i).find(".chordForm").text(this.scaleChordForms[i % this.scaleChordForms.length]);
+            //$step.find(".noteName").text (this.getNoteString(useNotes, i % useNotes.length));
+            $step.find(".noteName") .text(this.getNoteString(useNotes, i));
+            $step.find(".chordForm").text(this.scaleChordForms[i % this.scaleChordForms.length]);
+            $step.find(".root").text(this.getNoteString(useNotes, i));
+            $step.find(".third").text(this.getNoteString(useNotes, i + 2));
+            $step.find(".fifth").text(this.getNoteString(useNotes, i + 4));
+            $step.find(".seventh").text(this.getNoteString(useNotes, i + 6));
         }
         this.scaleScale();
     }

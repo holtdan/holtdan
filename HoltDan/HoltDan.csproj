@@ -410,6 +410,8 @@
     <Content Include="Views\Home\Zen.cshtml" />
     <Content Include="Views\Home\Scales.cshtml" />
     <Content Include="Views\Shared\_LayoutScales.cshtml" />
+    <Content Include="Views\Home\Frets.cshtml" />
+    <Content Include="Views\Home\Scales2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

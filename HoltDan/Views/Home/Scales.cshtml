@@ -20,16 +20,18 @@
 </div>
 <div id="base">
     @for (int i = 0; i < _totalSteps; i++)
-    {
-    <div class="row step interval@(i%7)" id="step@(i)">
+            {
+                var intIdx = i % 7;
+    <div class="row step interval@(intIdx)" id="step@(i)">
         <div class="col-xs-1"></div>
-        <div class="col-xs-1 noteName interval@(i%7)"></div>
-        <div class="col-xs-1 chordForm"></div>
-        <div class="col-xs-1 innerInterval interval0" title="root"></div>
-        <div class="col-xs-1 innerInterval interval2" title="3rd"></div>
-        <div class="col-xs-1 innerInterval interval4" title="5th"></div>
+        <div class="col-xs-1 noteName interval@(intIdx)"></div>
         <div class="col-xs-1"></div>
-        <div class="col-xs-1 innerInterval interval6" title="7th"></div>
+        <div class="col-xs-2 chordForm interval@(intIdx)"></div>
+        <div class="col-xs-1 root innerInterval interval0" title="root"></div>
+        <div class="col-xs-1 third innerInterval interval2" title="3rd"></div>
+        <div class="col-xs-1 fifth innerInterval interval4" title="5th"></div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-1 seventh innerInterval interval6" title="7th"></div>
     </div>
     }
 </div>

@@ -81,6 +81,10 @@ namespace HoltDan.Controllers
         }
         public ActionResult Scales()
         {
+            return View("Scales");
+        }
+        public ActionResult Frets()
+        {
             return View();
         }
     }

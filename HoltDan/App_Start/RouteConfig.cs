@@ -24,6 +24,11 @@ namespace HoltDan
                 url: "Scales",
                 defaults: new { controller = "Home", action = "Scales" }
             );
+            routes.MapRoute(
+                name: "Frets",
+                url: "Frets",
+                defaults: new { controller = "Home", action = "Frets" }
+            );
 
             routes.MapRoute(
                 name: "Default",

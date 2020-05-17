@@ -1,46 +1,55 @@
-﻿body {
-}
-.interval0 {
-    color: white;
-    background-color: green;
-}
-
-.interval1 {
-    color: black;
-    background-color: lightcoral;
-}
-
-.interval2 {
-    color: black;
-    background-color: cyan;
-}
-
-.interval3 {
-    color: white;
-    background-color: blue;
-}
-
-.interval4 {
-    color: white;
-    background-color: purple;
-}
-
-.interval5 {
-    color: black;
-    background-color: pink;
-}
-
-.interval6 {
-    color: black;
-    background-color: tan;
-}
-
+﻿@dsIntFg0: white;
+@dsIntBg0: green;
+@dsIntFg1: black;
+@dsIntBg1: lightcoral;
+@dsIntFg2: black;
+@dsIntBg2: cyan;
+@dsIntFg3: white;
+@dsIntBg3: blue;
+@dsIntFg4: white;
+@dsIntBg4: purple;
+@dsIntFg5: black;
+@dsIntBg5: pink;
+@dsIntFg6: black;
+@dsIntBg6: tan;
 body {
-    background-color: black;
+    /*background-color: black;*/
     padding: 0;
     overflow-x: hidden; /* menu off to right */
     overflow-y: hidden; /* rounding error on height */
 }
+.rune(@bg,@fg) {
+    font-weight: bold;
+    fill: @bg;
+    background-color: @bg;
+    color: @fg;
+}
+.interval0, [data-intIdx="0"] {
+    .rune(@dsIntBg0,@dsIntFg0);
+}
+.interval1, [data-intIdx="1"] {
+    .rune(@dsIntBg1,@dsIntFg1);
+}
+.interval2, [data-intIdx="2"] {
+    .rune(@dsIntBg2,@dsIntFg2);
+}
+.interval3, [data-intIdx="3"] {
+    .rune(@dsIntBg3,@dsIntFg3);
+}
+.interval4, [data-intIdx="4"] {
+    .rune(@dsIntBg4,@dsIntFg4);
+}
+.interval5, [data-intIdx="5"] {
+    .rune(@dsIntBg5,@dsIntFg5);
+}
+.interval6, [data-intIdx="6"] {
+    .rune(@dsIntBg6,@dsIntFg6);
+}
+/*.interval0 {
+    color: white;
+    background-color: green;
+}*/
+
 
 .step {
     text-align: center;
@@ -48,10 +57,10 @@ body {
     font-family: "Arial Black", Gadget, sans-serif;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 5px;
+    /*border-radius: 5px;
     border-color: black;
     border-style: solid;
-    border-width: 1px;
+    border-width: 1px;*/
     width: 100%;
 }
 
@@ -64,10 +73,16 @@ body {
     border-radius: 5px;
 }
 
-.noteName {
+.chordForm {
+    text-align: center;
+    font-family: "Arial", Gadget, sans-serif;
+    height: 50%;
+    top: 25%;
 }
-
-
+.noteName {
+    text-align: left;
+    font-family: "Arial Black", Gadget, sans-serif;
+}
 .optSelect {
     text-align: center;
     font-family: "Arial Black", Gadget, sans-serif;

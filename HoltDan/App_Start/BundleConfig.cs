@@ -55,6 +55,15 @@ namespace HoltDan
             cssBundle.Transforms.Add(cssTransformer);
             cssBundle.Orderer = nullOrderer;
             bundles.Add(cssBundle);
+
+            cssBundle = new StyleBundle("~/bundles/cssNoBS");
+            cssBundle.Include("~/Content/css",
+                      "~/Content/HoltDan.less",
+                      "~/Content/DanScales.less");
+            cssBundle.Builder = new NullBuilder();
+            cssBundle.Transforms.Add(cssTransformer);
+            cssBundle.Orderer = nullOrderer;
+            bundles.Add(cssBundle);
         }
     }
 }
