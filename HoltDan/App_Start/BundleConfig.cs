@@ -49,8 +49,7 @@ namespace HoltDan
             var cssBundle = new StyleBundle("~/bundles/css");
             cssBundle.Include("~/Content/css",
                       "~/Content/bootstrap.css",
-                      "~/Content/HoltDan.less",
-                      "~/Content/DanScales.less");
+                      "~/Content/HoltDan.less");
             cssBundle.Builder = new NullBuilder();
             cssBundle.Transforms.Add(cssTransformer);
             cssBundle.Orderer = nullOrderer;

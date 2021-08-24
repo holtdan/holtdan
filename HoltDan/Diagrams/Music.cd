@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="HoltDan.Models.SongAlbumViewModel">
+    <Position X="1" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SongViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoltDan.Models.SongViewModel">
+    <Position X="1" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAAAAAAEAAIAAAAAAAEAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\SongViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoltDan.Models.DirFiles">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQBAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DirFilesModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoltDan.Models.DirMgr">
+    <Position X="3.75" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="HoltDan.Models.DirMgr.AudioFileInfo">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\DirFilesModels.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="HoltDan.Models.DirMgr.FileSet">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\DirFilesModels.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAACEAgAAAAAAAAAAAAAAAAAAAAAIAAEIE=</HashCode>
+      <FileName>Models\DirFilesModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -5,7 +5,6 @@
 @{ 
 }
 <div class="danSong" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName">
-    <div>
         <div class="danTransport">
             <div class="danMediaButton danPlayPauseButton">
                 <b class="glyphicon glyphicon-play"></b>
@@ -14,5 +13,4 @@
         <div class="danTitle">@Model.Title</div>
         <div class="danPlayback"><div class="danProgress"><div class="danProgressBar"></div></div>@Model.DurationFormatted()</div>
         <div class="danNotes">@Html.Raw(Model.Notes)</div>
-    </div>
 </div>

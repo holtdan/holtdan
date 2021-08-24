@@ -29,7 +29,11 @@ namespace HoltDan
                 url: "Frets",
                 defaults: new { controller = "Home", action = "Frets" }
             );
-
+            routes.MapRoute(
+                name: "Music",
+                url: "Music",
+                defaults: new { controller = "Music", action = "Index" }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

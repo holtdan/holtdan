@@ -8,12 +8,12 @@
 <div class="danSongAlbum">
     <div class="danNotes">@Html.Raw(Model.Notes)</div>
     <div class="danTransport">
-        <div class="danMediaButton danPlayPauseButton  danPlayPauseAllButton">
+        <div class="danMediaButton danPlayPauseButton danPlayPauseAllButton">
             <b class="glyphicon glyphicon-play"></b>
         </div>
     </div>
     <div class="danTitle">@Model.Title</div>
-    <div class="danDiv">
+    <div class="danSongList">
         @{
             var trackNum = 0;
             foreach (var f in Model.Files)
