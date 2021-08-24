@@ -191,3 +191,6 @@ ModelManifest.xml
 /.vs/config/applicationhost.config
 /HoltDan/Scripts/AudioMgr.js
 /.vs/HoltDan
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
