@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="HoltDan.Models.DirFiles">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQBAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DirFilesModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoltDan.Models.DirMgr">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="HoltDan.Models.DirMgr.AudioFileInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\DirFilesModels.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="HoltDan.Models.DirMgr.FileSet" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\DirFilesModels.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAACEAgAAAAAAAAAAAAAAAAAAAAAIAAEIE=</HashCode>
+      <FileName>Models\DirFilesModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

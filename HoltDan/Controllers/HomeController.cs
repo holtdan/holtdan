@@ -18,7 +18,17 @@ namespace HoltDan.Controllers
             ViewBag.PhotoRoots = photosRoots;
             ViewBag.MediaRoot = Server.MapPath("~/media/");
             ViewBag.SongsRoot = Server.MapPath("~/media/Songs/");
+            var songsRoots = Directory.GetDirectories((string)ViewBag.SongsRoot);//.Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
+            ViewBag.SongRoots = songsRoots;
             //var vm = new PhotosViewModel(Server, photosRoots, "Family");
+
+            ViewBag.SongsMap = (from d in songsRoots
+                                orderby d
+                                select new
+                                {
+                                    dir = d.Substring(d.LastIndexOf("\\") + 1),
+                                    dirs = Directory.GetDirectories(d).Select(a => a.Substring(a.LastIndexOf("\\") + 1)).ToList()
+                                }).ToDictionary(k => k.dir, v => v.dirs);
 
             base.OnActionExecuting(filterContext);
         }

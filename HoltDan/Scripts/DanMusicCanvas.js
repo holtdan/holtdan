@@ -1,4 +1,4 @@
-var MusicCanvas = (function () {
+var MusicCanvas = /** @class */ (function () {
     function MusicCanvas() {
     }
     MusicCanvas.DrawGuitarNeck = function (opts) {

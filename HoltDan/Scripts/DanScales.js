@@ -1,4 +1,4 @@
-var Scales = (function () {
+var Scales = /** @class */ (function () {
     function Scales() {
         this.notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
         this.steps = [2, 2, 1, 2, 2, 2, 1];
