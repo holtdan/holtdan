@@ -38,39 +38,24 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Music<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dan Music<b class="caret"></b></a>
                         <ul class="dropdown-menu" id="songsDDMenu">
                             @foreach (var kvp in songsDict)
                             {
                                 <li class="artistName">
                                     @kvp.Key
-                                    <ul>
+                                    <ul class="no-bullets">
                                         @foreach (var v in kvp.Value)
                                         {
                                             var fName = kvp.Key + "\\" + v;
-                                            <li>@Html.ActionLink(@v, "Songs", "Home", new { @album = fName }, null)</li>
+                                            <li class="danAlbumTitle">@Html.ActionLink(@v, "Songs", "Home", new { @album = fName }, null)</li>
                                         }
                                     </ul>
                                 </li>
                             }
                         </ul>
-                        @*<ul class="dropdown-menu">
-                <li>Dan Songs</li>
-                <li>@Html.ActionLink("201X", "Songs", "Home", new { @album = "201x" }, null)</li>
-                <li>@Html.ActionLink("2 2000", "Songs", "Home", new { @album = "2 2000" }, null)</li>
-                <li>@Html.ActionLink("Big Bang Theory ... And Then Some", "Songs", "Home", new { @album = "Big Bang Theory ... And Then Some" }, null)</li>
-                <li>@Html.ActionLink("1988 - 1992", "Songs", "Home", new { @album = "1988 - 1992" }, null)</li>
-                <li>@Html.ActionLink("1986 - 1989", "Songs", "Home", new { @album = "1986 - 1989" }, null)</li>
-                <li>@Html.ActionLink("1984 - 1986", "Songs", "Home", new { @album = "1984 - 1986" }, null)</li>
-                <li role="separator" class="divider"></li>
-                <li>Dan Bands</li>
-                <li>@Html.ActionLink("Social Function", "Songs", "Home", new { @album = "bands/Social Function" }, null)</li>
-                <li>@Html.ActionLink("Crossword Smile", "Songs", "Home", new { @album = "bands/Crossword Smile" }, null)</li>
-                <li>@Html.ActionLink("The Brothers Holt", "Songs", "Home", new { @album = "bands/The Brothers Holt" }, null)</li>
-                <li role="separator" class="divider"></li>
-            </ul>*@
                     </li>
-                    
+                    <li>@Html.ActionLink("OPM", "Music", "Home")</li>
                     @*<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other<b class="caret"></b></a>
             <ul class="dropdown-menu">

@@ -4,7 +4,7 @@
 @model HoltDan.Models.SongViewModel
 @{ 
 }
-<div class="danSong" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName">
+<div class="danSong" data-tracknum="@Model.TrackNum" data-secsdur="@Model.SecondsDuration" data-fname="@Model.FileName.Replace('\\','/')">
         <div class="danTransport">
             <div class="danMediaButton danPlayPauseButton">
                 <b class="glyphicon glyphicon-play"></b>

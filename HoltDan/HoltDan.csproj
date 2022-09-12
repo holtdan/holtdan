@@ -220,7 +220,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\TurokController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -416,9 +415,9 @@
     <Content Include="Views\Shared\_LayoutScales.cshtml" />
     <Content Include="Views\Home\Frets.cshtml" />
     <Content Include="Views\Home\Scales2.cshtml" />
-    <Content Include="Views\Music\Index.cshtml" />
-    <Content Include="Views\Music\_AlbumList.cshtml" />
-    <Content Include="Views\Music\_Album.cshtml" />
+    <Content Include="Views\Home\Music.cshtml" />
+    <Content Include="Views\Shared\_AlbumList.cshtml" />
+    <Content Include="Views\Shared\_Album.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -12,6 +12,11 @@ body {
     /*font-family: 'Nova Flat';*/
     font-family: 'Segoe Print';
 }
+ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+}
 .danDiv(){
     border-radius: 5px;
     border-color: lightgray;
@@ -32,6 +37,9 @@ body {
     text-align:center;
     display: inline-block;
 }
+.danArtist {
+    cursor: pointer;
+}
 .artistName{
     color: black;
     font-weight: bold;
@@ -41,24 +49,29 @@ body {
 }
 .danAlbumList {
     .danDiv;
-    width: 100%;
+    /*width: 100%;*/
 }
 .danAlbum {
-    .danDiv;
-    width: 100%;
+    margin-left: 15px;
+    /*.danDiv;
+    width: 100%;*/
+}
+.danAlbumTitle {
+    margin-left: 15px;
 }
 .danSongList {
     .danDiv;
     width: 100%;
 }
-.danSong{
+.danSong {
     .danDiv;
-    width: 100%;
+    margin-left: 1em;
+    /*width: 100%;*/
 }
 .danSongAlbum{
-    .danSong;
+    /*.danSong;
     border-style: solid;
-    border-width: 1px;
+    border-width: 1px;*/
 }
 .danTransport {
     display: inline-block;

@@ -77,6 +77,7 @@ class DanAudioMgr {
     private player: any;
     private album: DanSongAlbum;
     private autoPlay: boolean; // enabled by clicking album-level Play button
+    private $btnPlaying: JQuery;
 
     constructor(public audioPlayerID: string, public danSongAlbumSelector: string,
         public eventCallback: (triggerElem: JQuery, eventName: string, currentTime?: number) => void) {
@@ -84,7 +85,7 @@ class DanAudioMgr {
         this.album = new DanSongAlbum(danSongAlbumSelector);
         this.player = document.getElementById(audioPlayerID);
         let self: DanAudioMgr = this;
-        self.player.src = "/media/songs/" + self.album.getCurSong().fileName; // prime the pump!
+        this.player.src = this.album.getCurSong().fileName; // prime the pump!
 
         // browser can start playing
         this.player.oncanplay = function () {
@@ -94,7 +95,7 @@ class DanAudioMgr {
         this.player.onplay = function () {
             let sng = self.album.getCurSong();
             //debugger;
-            //if (self.eventCallback) self.eventCallback(self.$btnPlaying, "onplay");
+            self.eventCallback(self.$btnPlaying, "onplay");
             self.toggleBtnPlaying(true);
             sng.$title.addClass("danPlayPauseButtonActive")
             sng.$bar.width(0);
@@ -103,17 +104,17 @@ class DanAudioMgr {
         // media is playing after paused or stopped for buffering
         // onplaying -------------------------
         this.player.onplaying = function () {
-                    console.log("onplaying");
+            console.log("onplaying");
         };
         // media has paused
         this.player.onpause = function () {
             //debugger;
-            //if (self.eventCallback) self.eventCallback(self.$btnPlaying, "onpause");
+            self.eventCallback(self.$btnPlaying, "onpause");
             self.toggleBtnPlaying(false);
         };
         // current playlist has ended
         this.player.onended = function () {
-            //if (self.eventCallback) self.eventCallback(self.$btnPlaying, "onended");
+            self.eventCallback(self.$btnPlaying, "onended");
             //debugger;
             self.setCurrentStopped();
             if (self.autoPlay)
@@ -128,14 +129,15 @@ class DanAudioMgr {
             var currSecs = parseInt(self.player.currentTime);
             var totSecs = sng.secsDur;
             sng.$bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
-            //if (self.eventCallback) self.eventCallback(self.$btnPlaying, "ontimeupdate", secs);
+            self.eventCallback(self.$btnPlaying, "ontimeupdate", currSecs);
         };
         // browser started looking for media
         this.player.onloadstart = function () {
             console.log("onloadstart");
         }
-        $(".danPlayPauseButton").click(function () {
+        $(".danPlayPauseButton").unbind('click').click(function () {
             //debugger;
+            self.$btnPlaying = $(this);
             if ($(this).hasClass("danPlayPauseAllButton")){
                 self.autoPlay = true; // clicked album-level play
                 if (self.player.paused)
@@ -161,7 +163,7 @@ class DanAudioMgr {
         })
     }
     private playThis(sng: DanSong) {
-        let playName = "/media/songs/" + sng.fileName;
+        let playName = /*this.filesPrefix +*/ sng.fileName;
         this.player.src = playName;
         this.player.play();
     }

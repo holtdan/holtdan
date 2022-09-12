@@ -17,6 +17,7 @@ namespace HoltDan.Controllers
             var photosRoots = Directory.GetDirectories(photosPath).Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
             ViewBag.PhotoRoots = photosRoots;
             ViewBag.MediaRoot = Server.MapPath("~/media/");
+            ViewBag.MusicRoot = Server.MapPath("~/media/Music");
             ViewBag.SongsRoot = Server.MapPath("~/media/Songs/");
             var songsRoots = Directory.GetDirectories((string)ViewBag.SongsRoot);//.Select(d => d.Substring(d.LastIndexOf("\\") + 1)).ToList();
             ViewBag.SongRoots = songsRoots;
@@ -75,10 +76,7 @@ namespace HoltDan.Controllers
         }
         public ActionResult Songs(string album)
         {
-            if (album.StartsWith("bands_"))
-                album = album.Replace("bands_", "bands/");
-
-            var dm = new DirMgr(Server.MapPath($"~/media/songs/{album}/"), $"{album}");
+            var dm = new DirMgr(Server.MapPath($"~/media/songs/{album}/"), $"/media/songs/{album}/");
             return View("SongAlbum",dm);
         }
         public ActionResult Hands()
@@ -96,6 +94,39 @@ namespace HoltDan.Controllers
         public ActionResult Frets()
         {
             return View();
+        }
+        public ActionResult Music()
+        {
+            return View(new MusicViewModel(ViewBag.MusicRoot));
+        }
+        public PartialViewResult AlbumList(string artist)
+        {
+            var path = $"{ViewBag.MusicRoot}\\{artist}";
+            return PartialView("_AlbumList",
+                (from d in Directory.GetDirectories(path)
+                 orderby d
+                 select d.Substring(path.Length + 1)
+                 ).ToList()
+                );
+        }
+        //[Route("music/{artist}/{album}")]
+        public PartialViewResult Album(string artist, string album)
+        {
+            var refRoot = $"/media/music/{artist}/{album}/";
+
+            var dm = new DirMgr(Server.MapPath(refRoot), refRoot);
+            return PartialView("_Album", dm);
+        }
+        public ActionResult Play(string artist, string album)
+        {
+            var songRoots = Directory.GetDirectories((string)ViewBag.SongsRoot).Select(s => s.DirLeaf().ToLower());
+            var isDan = songRoots.Contains(artist.ToLower());
+            var refRoot = isDan ? $"/media/songs/{artist}/{album}/" : $"/media/music/{artist}/{album}/";
+
+            var dm = new DirMgr(Server.MapPath(refRoot), refRoot);
+
+            ViewBag.MinimalLayout = true;
+            return View("SongAlbum", dm);
         }
     }
 }

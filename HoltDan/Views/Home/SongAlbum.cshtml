@@ -4,6 +4,10 @@
 @model HoltDan.Models.DirMgr
 @{
     ViewBag.Title = "SongAlbum";
+    if (ViewBag.MinimalLayout != null)
+    {
+        Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+    }
 }
 <div class="danSongAlbum">
     <div class="danNotes">@Html.Raw(Model.Notes)</div>
@@ -71,5 +75,5 @@
             }
             first = !first;
         })
-        </script>
+    </script>
 }
