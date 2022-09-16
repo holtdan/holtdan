@@ -18,7 +18,7 @@ namespace HoltDan
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            App_Start.JsEngineSwitcherConfig.Configure(JavaScriptEngineSwitcher.Core.JsEngineSwitcher.Instance);
+            App_Start.JsEngineSwitcherConfig.Configure((JavaScriptEngineSwitcher.Core.JsEngineSwitcher)JavaScriptEngineSwitcher.Core.JsEngineSwitcher.Current);
         }
     }
 }
