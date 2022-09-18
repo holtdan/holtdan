@@ -1,0 +1,24 @@
+﻿@model HoltDan.Models.DirMgr
+
+<div class="danSongAlbum">
+    <div class="danNotes">@Html.Raw(Model.Notes)</div>
+    <div class="danTransport">
+        <div class="danMediaButton danPlayPauseButton danPlayPauseAllButton">
+            <b class="glyphicon glyphicon-play"></b>
+        </div>
+    </div>
+    <div class="danTitle">@Model.Title</div>
+    <div class="danSongList">
+        @{
+            var trackNum = 0;
+            foreach (var f in Model.Files)
+            {
+                if (f.AudioFileInfo != null) // not some file laying around
+                {
+                    var useTitle = string.IsNullOrWhiteSpace(f.AudioFileInfo.Title) ? f.AudioFileName : f.AudioFileInfo.Title;
+                    Html.RenderPartial("_Song", new SongViewModel(trackNum++, f.AudioFileName, useTitle, f.Notes, f.SecondsDuration));
+                }
+            }
+        }
+    </div>
+</div>

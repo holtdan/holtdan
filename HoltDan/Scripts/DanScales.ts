@@ -9,6 +9,7 @@ class Scales {
     private steps = [2, 2, 1, 2, 2, 2, 1];
     private pentIdxs = [0, 2, 3, 4, 6];
     private scaleChordForms = ["I", "ii", "iii", "IV", "V", "vi", "viio"];
+    private modes = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"]
     private numOcts = 2;
     private keyIdx = 7;
     private mode = 0;

@@ -1,13 +1,14 @@
 ﻿@{
-        ViewBag.Title = "Scales";
-        Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+    ViewBag.Title = "Scales";
+    Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
 
-        var _notes = new List<string> { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+    var _notes = new List<string> { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+    var _modes = new List<string> { "Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian" };
     var _totalSteps = 15;
-    }
-    @section Styles
-    {
-    
+}
+@section Styles
+{
+    <link href="@Url.Content("~/Content/DanScales.less")" rel="stylesheet" />
 }
 <div id="danMenu">
     <div id="pickKey">Key</div>
@@ -22,16 +23,16 @@
     @for (int i = 0; i < _totalSteps; i++)
             {
                 var intIdx = i % 7;
-    <div class="row step interval@(intIdx)" id="step@(i)">
+    <div class="row step" id="step@(i)" data-intIdx="@(intIdx)" >
         <div class="col-xs-1"></div>
-        <div class="col-xs-1 noteName interval@(intIdx)"></div>
+        <div data-intIdx="@(intIdx)" class="col-xs-1 noteName"></div>
         <div class="col-xs-1"></div>
-        <div class="col-xs-2 chordForm interval@(intIdx)"></div>
-        <div class="col-xs-1 root innerInterval interval0" title="root"></div>
-        <div class="col-xs-1 third innerInterval interval2" title="3rd"></div>
-        <div class="col-xs-1 fifth innerInterval interval4" title="5th"></div>
+        <div data-intIdx="@(intIdx)" class="col-xs-2 chordForm"></div>
+        <div data-intIdx="0" class="col-xs-1 root innerInterval" title="root"></div>
+        <div data-intIdx="2" class="col-xs-1 third innerInterval" title="3rd"></div>
+        <div data-intIdx="4" class="col-xs-1 fifth innerInterval" title="5th"></div>
         <div class="col-xs-1"></div>
-        <div class="col-xs-1 seventh innerInterval interval6" title="7th"></div>
+        <div data-intIdx="6" class="col-xs-1 seventh innerInterval" title="7th"></div>
     </div>
     }
 </div>

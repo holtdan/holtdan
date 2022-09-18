@@ -4,23 +4,28 @@
 @model HoltDan.Models.DirMgr
 @{
     ViewBag.Title = "SongAlbum";
+    if (ViewBag.MinimalLayout != null)
+    {
+        Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+    }
 }
 <div class="danSongAlbum">
     <div class="danNotes">@Html.Raw(Model.Notes)</div>
     <div class="danTransport">
-        <div class="danMediaButton danPlayPauseButton  danPlayPauseAllButton">
+        <div class="danMediaButton danPlayPauseButton danPlayPauseAllButton">
             <b class="glyphicon glyphicon-play"></b>
         </div>
     </div>
     <div class="danTitle">@Model.Title</div>
-    <div class="danDiv">
+    <div class="danSongList">
         @{
             var trackNum = 0;
             foreach (var f in Model.Files)
             {
                 if (f.AudioFileInfo != null) // not some file laying around
                 {
-                    var useTitle = string.IsNullOrWhiteSpace(f.AudioFileInfo.Title) ? f.AudioFileName : f.AudioFileInfo.Title;
+                    var useTitle = !string.IsNullOrWhiteSpace(f.AudioFileInfo.Title) ? f.AudioFileInfo.Title
+                        : f.AudioFileName.Substring(f.AudioFileName.LastIndexOf("\\") + 1);
                     Html.RenderPartial("_Song", new SongViewModel(trackNum++, f.AudioFileName, useTitle, f.Notes, f.SecondsDuration));
                 }
             }
@@ -70,5 +75,5 @@
             }
             first = !first;
         })
-        </script>
+    </script>
 }

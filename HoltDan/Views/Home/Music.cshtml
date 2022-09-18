@@ -1,0 +1,161 @@
+﻿@model HoltDan.Models.MusicViewModel
+@{
+    //Layout = "~/Views/Shared/_LayoutMinimal.cshtml";
+}
+@section Styles
+{
+    <style>
+        
+        /*html, body {
+            height: 100%;
+        }*/
+
+        /* Main view, move content down due to fixed navbar. */
+        .main-wrapper {
+            height: 100%;
+            width: 100%;
+            /*position: absolute;*/
+            top: 0px;
+            left: 0px;
+            /*padding-top: 50px;*/
+        }
+
+        /* Container for a sidebar. */
+        .sidebar-container {
+            height: 100%;
+            /*position: fixed;*/
+            padding-left: 15px;
+            /*margin-left: 15px;
+            /*margin-top: -50px;
+            padding-top: 50px;*/
+            border-right: 1px solid #ddd;
+        }
+    </style>
+}
+<div class="main-wrapper">
+    <div class="danDiv">
+        <div class="row">
+            <div class="sidebar-containerXXX col-xs-4">
+                <div class="scrollDiv">
+                    @foreach (var dir in Model.Dirs)
+                    {
+                        var artName = dir.Substring(dir.LastIndexOf("\\") + 1);
+                        <div class="danArtist danArtistName" data-dir="@dir" data-artist-name="@artName">
+                            @artName
+                            <div class="danArtistAlbumsDir" data-artist-name="@artName">
+                                SPIN!
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="scrollDiv">
+                    <div id="songs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<audio id="audioPlayer" src="">
+    Your browser does not support the audio format.
+</audio>
+@section Scripts
+{
+    <script type="text/javascript">
+        let audioMgr = null;
+
+        function ArtistData(elem) {
+            let $elem = $(elem);
+            let data = {
+                dirName: $elem.data('dir'),
+                artName: $elem.data('artist-name'),
+                dirDiv: $(".danArtistAlbumsDir[data-artist-name='" + $elem.data('artist-name') + "']")
+            }
+            return data;
+        }
+        function AlbumData(elem) {
+            let $elem = $(elem);
+            let data = {
+                artData: ArtistData($elem.closest('.danArtist')),
+                albName: $elem.attr('album-name')
+            }
+            return data;
+        }
+        function HandleAlbumEvents() {
+            $(".danAlbum").unbind('click').click(function (e) {
+                //debugger;
+                e.stopPropagation();
+                //let $this = $(this);
+                let albData = AlbumData(this);
+                let urlAction = "@Html.Raw(Url.Action("Album", new { artist = "XXX", album = "YYY" }))"
+                    .replace("XXX", albData.artData.artName)
+                    .replace("YYY", albData.albName)
+                $.get(urlAction,
+                    function (d, textStatus, jqXHR) {
+                        $('#songs').html(d)
+                        if (!audioMgr )
+                            CreateAudioMgr();
+                    });
+            });
+        }
+        $(".danArtist").unbind('click').click(function () {
+            //debugger;
+            let artData = ArtistData(this);
+            if (artData.dirDiv.is(':visible'))
+                artData.dirDiv.hide();
+            else {
+                $.get("@Url.Action("AlbumList", new { artist = "XXX" })".replace("XXX", artData.artName),
+                    function (d, textStatus, jqXHR) {
+                        artData.dirDiv.html(d);
+                        HandleAlbumEvents();
+                    });
+                artData.dirDiv.show();
+            }
+        });
+        $(".danArtistAlbumsDir").hide();
+        /*
+         * ================= Player ...
+         */
+        let firstPlay = true;
+        function CreateAudioMgr() {
+            audioMgr = new DanAudioMgr("audioPlayer", ".danSongAlbum",
+                function (triggerElem, eventName, currSecs) {
+                    var $t = $(triggerElem);
+                    var $p = $t.closest(".danSong");
+                    var $title = $p.find(".danTitle");
+                    var $prog = $p.find(".danProgress");
+                    var $bar = $p.find(".danProgressBar");
+                    if (eventName == "onplay") {
+                        $(".danPlayPauseButtonActive").removeClass("danPlayPauseButtonActive")
+                        //$(".danProgress").css("display", "none")
+                        $title.addClass("danPlayPauseButtonActive")
+
+                        $bar.width = 0;
+                        $prog.addClass("danProgressShow")
+                    }
+                    else if (eventName == "onstop" || eventName == "onended") {
+                        $title.removeClass("danPlayPauseButtonActive")
+                        $prog.removeClass("danProgressShow").addClass("danProgressHide")
+                    }
+                    else if (eventName == "ontimeupdate") {
+                        var totSecs = $t.data("secsdur")
+                        $bar.css("width", (Math.round((currSecs / totSecs) * 100)) + "%")
+                    }
+                });
+
+            $(".danPlayPauseButtonXXX").unbind('click').click(function () {
+                //alert("Click!")
+                if (firstPlay) {
+                    $(".danPrevMediaButton,.danNextMediaButton").removeClass("danScaleOut")
+                    $(".danPrevMediaButton,.danNextMediaButton").addClass("danScaleIn")
+                }
+                else {
+                    $(".danPrevMediaButton,.danNextMediaButton").removeClass("danScaleIn")
+                    $(".danPrevMediaButton,.danNextMediaButton").addClass("danScaleOut")
+                }
+                firstPlay = !firstPlay;
+            })
+        }
+    </script>
+}

@@ -21,7 +21,7 @@ namespace HoltDan.Models
 
         public PhotosViewModel()
         {
-            IntervalSpan = "0:0:10";
+            IntervalSpan = "0:0:5";
         }
         public PhotosViewModel(string dir)
             :this()

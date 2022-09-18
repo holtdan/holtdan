@@ -13,23 +13,27 @@ namespace HoltDan
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Pics",
-                url: "Photos/{id}",
-                defaults: new { controller = "Photos", action = "Index", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "Pics",
+            //    url: "Photos/{id}",
+            //    defaults: new { controller = "Photos", action = "Index", id = UrlParameter.Optional }
+            //);
 
+            //routes.MapRoute(
+            //    name: "Scales",
+            //    url: "Scales",
+            //    defaults: new { controller = "Home", action = "Scales" }
+            //);
+            //routes.MapRoute(
+            //    name: "Frets",
+            //    url: "Frets",
+            //    defaults: new { controller = "Home", action = "Frets" }
+            //);
             routes.MapRoute(
-                name: "Scales",
-                url: "Scales",
-                defaults: new { controller = "Home", action = "Scales" }
+                name: "Play",
+                url: "Play/{artist}/{album}",
+                defaults: new { controller = "Home", action = "Play" }
             );
-            routes.MapRoute(
-                name: "Frets",
-                url: "Frets",
-                defaults: new { controller = "Home", action = "Frets" }
-            );
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

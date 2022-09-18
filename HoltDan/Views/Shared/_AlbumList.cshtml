@@ -1,0 +1,10 @@
+﻿@model IEnumerable<string>
+@{
+    var collapse = ViewData["collapse"] as bool?;
+}
+    @foreach (var album in Model)
+    {
+        <div class="danAlbum" album-name="@album">
+            @album
+        </div>
+    }

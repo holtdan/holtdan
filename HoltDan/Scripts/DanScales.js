@@ -1,9 +1,10 @@
-var Scales = (function () {
+var Scales = /** @class */ (function () {
     function Scales() {
         this.notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
         this.steps = [2, 2, 1, 2, 2, 2, 1];
         this.pentIdxs = [0, 2, 3, 4, 6];
         this.scaleChordForms = ["I", "ii", "iii", "IV", "V", "vi", "viio"];
+        this.modes = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"];
         this.numOcts = 2;
         this.keyIdx = 7;
         this.mode = 0;
