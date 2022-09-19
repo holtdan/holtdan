@@ -29,9 +29,9 @@ namespace HoltDan.Models
         public string Notes { get; set; }
         public List<FileSet> Files { get; set; }
 
-        static string[] AudioSuffixes = { ".mp3", ".wav" };
-        static string[] ImageSuffixes = { ".png", ".jpg", ".bmp", ".gif" };
-        static string[] TextSuffixes = { ".html", ".txt" };
+        static public string[] AudioSuffixes = { ".mp3", ".wav" };
+        static public string[] ImageSuffixes = { ".png", ".jpg", ".bmp", ".gif" };
+        static public string[] TextSuffixes = { ".html", ".txt" };
 
         static Random _random = new Random();
         static public void Shuffle<T>(T[] array)

@@ -65,6 +65,18 @@ namespace HoltDan.Controllers
             ViewBag.HoldSeconds = (int)TimeSpan.Parse(vm.IntervalSpan).TotalSeconds;
             return View(vm.BuildShow(Server.MapPath($"~/media/Photos/")));
         }
+        public ActionResult Show(string id, string album)
+        {
+            var photosPath = Server.MapPath($"~/media/Photos/{id}/{album}");
+
+            var foundFiles = (from f in Directory.GetFiles(photosPath, "*.*", SearchOption.TopDirectoryOnly)
+                              where DirMgr.ImageSuffixes.Contains(Path.GetExtension(f).ToLower())
+                              orderby f
+                              select $"/media/Photos/{id}/{album}/{Path.GetFileName(f)}").ToArray();
+
+            ViewBag.HoldSeconds = 5;
+            return View("ShowPhotos",foundFiles);
+        }
         public ActionResult Guitars()
         {
             return View();
