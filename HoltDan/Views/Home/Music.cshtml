@@ -94,7 +94,7 @@
                 $.get(urlAction,
                     function (d, textStatus, jqXHR) {
                         $('#songs').html(d)
-                        if (!audioMgr )
+                        //if (!audioMgr )
                             CreateAudioMgr();
                     });
             });
@@ -119,6 +119,7 @@
          */
         let firstPlay = true;
         function CreateAudioMgr() {
+            audioMgr = null;
             audioMgr = new DanAudioMgr("audioPlayer", ".danSongAlbum",
                 function (triggerElem, eventName, currSecs) {
                     var $t = $(triggerElem);

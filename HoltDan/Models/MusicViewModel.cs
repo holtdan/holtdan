@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace HoltDan.Models
@@ -13,7 +14,10 @@ namespace HoltDan.Models
         public MusicViewModel(string root)
         {
             Root = root;
-            Dirs = Directory.GetDirectories(root).Select(d => d.Substring(root.Length + 1)).ToList();
+            Dirs = (from s in Directory.GetDirectories(root)
+                    orderby s.StartsWith("The ", StringComparison.OrdinalIgnoreCase) ?
+                            s.Substring(s.IndexOf(" ") + 1) : s
+                    select s).ToList();
         }
     }
 }

@@ -72,6 +72,10 @@ class DanSongAlbum { // should derive from DanAlbum so can DanPhotoAlbum, etc.
         let cs = this.songs[this.curSongIdx];
         return cs;
     }
+    public isLastSong(): boolean {
+        let yep = this.curSongIdx == this.songs.length - 1;
+        return yep;// this.curSongIdx == this.songs.length - 1;
+    }
 }
 class DanAudioMgr {
     private player: any;
@@ -117,7 +121,7 @@ class DanAudioMgr {
             self.eventCallback(self.$btnPlaying, "onended");
             //debugger;
             self.setCurrentStopped();
-            if (self.autoPlay)
+            if (self.autoPlay && !self.album.isLastSong())
                 self.playThis(self.album.gotoNextSong());
             //let $b = $(self.$btnPlaying).find("b");
             //$b.removeClass('danPlayPauseButtonActive')

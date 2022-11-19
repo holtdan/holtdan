@@ -31,8 +31,8 @@ namespace HoltDan
             //);
             routes.MapRoute(
                 name: "Play",
-                url: "Play/{artist}/{album}",
-                defaults: new { controller = "Home", action = "Play" }
+                url: "Play/{artist}/{album}/{song}",
+                defaults: new { controller = "Home", action = "Play", song = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Show",

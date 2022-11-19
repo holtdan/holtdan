@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HoltDan</RootNamespace>
     <AssemblyName>HoltDan</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -419,6 +419,7 @@
     <Content Include="Views\Home\Music.cshtml" />
     <Content Include="Views\Shared\_AlbumList.cshtml" />
     <Content Include="Views\Shared\_Album.cshtml" />
+    <Content Include="Views\Home\Song.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

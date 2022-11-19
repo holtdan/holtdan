@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using static HoltDan.Models.DirMgr;
 
 namespace HoltDan.Controllers
 {
@@ -129,16 +130,37 @@ namespace HoltDan.Controllers
             var dm = new DirMgr(Server.MapPath(refRoot), refRoot);
             return PartialView("_Album", dm);
         }
-        public ActionResult Play(string artist, string album)
+        public ActionResult Play(string artist, string album, string song)
         {
             var songRoots = Directory.GetDirectories((string)ViewBag.SongsRoot).Select(s => s.DirLeaf().ToLower());
             var isDan = songRoots.Contains(artist.ToLower());
             var refRoot = isDan ? $"/media/songs/{artist}/{album}/" : $"/media/music/{artist}/{album}/";
+            var svrRoot = Server.MapPath(refRoot);
+            if (string.IsNullOrWhiteSpace(song))
+            {
+                var dm = new DirMgr(svrRoot, refRoot);
 
-            var dm = new DirMgr(Server.MapPath(refRoot), refRoot);
-
-            ViewBag.MinimalLayout = true;
-            return View("SongAlbum", dm);
+                ViewBag.MinimalLayout = true;
+                return View("SongAlbum", dm);
+            }
+            else
+            {
+                var fileSysName = $"{svrRoot}{song}.mp3";
+                TagLib.File taglibFile = TagLib.File.Create(fileSysName, TagLib.ReadStyle.Average);
+                var fs = new FileSet() 
+                {
+                    AudioFileName = $"{refRoot}{song}.mp3",
+                    SecondsDuration = (int)taglibFile.Properties.Duration.TotalSeconds,
+                    AudioFileInfo = new AudioFileInfo
+                    {
+                        TrackNum = (int)taglibFile.Tag.Track,
+                        Album = taglibFile.Tag.Album,
+                        Title = taglibFile.Tag.Title
+                    },
+                    Title = string.IsNullOrEmpty(taglibFile.Tag.Title) ? Path.GetFileName(song) : taglibFile.Tag.Title
+                };
+                return View("Song", fs);
+            }
         }
     }
 }

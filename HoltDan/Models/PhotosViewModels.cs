@@ -48,8 +48,11 @@ namespace HoltDan.Models
                 var dName = $"{rootDir}/{Dir}/{d.ID}";
                 if (Directory.Exists(dName))
                 {
-                    var foundFiles = Directory.GetFiles(dName, "*.*", SearchOption.AllDirectories).Select(s => s.Replace("\\", "/"));
-                    //files.AddRange(foundFiles);//.Select(s => d + "/" + s.Substring(s.LastIndexOf("/") + 1)));
+                    var foundFiles = (from f in Directory.GetFiles(dName, "*.*", SearchOption.TopDirectoryOnly)
+                                      where DirMgr.ImageSuffixes.Contains(Path.GetExtension(f).ToLower())
+                                      orderby f
+                                      select f.Replace("\\", "/"));
+
                     files.AddRange(foundFiles.Select(s => $"~/media/Photos/{Dir}/{d.ID}/{s.Substring(s.LastIndexOf("/") + 1)}"));
                 }
             }
