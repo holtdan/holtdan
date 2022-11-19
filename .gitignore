@@ -192,3 +192,5 @@ ModelManifest.xml
 /HoltDan/Scripts/AudioMgr.js
 /.vs/HoltDan
 /.vs
+/HoltDan/Scripts/DanMusicCanvas.js
+/HoltDan/Scripts/DanScales.js
